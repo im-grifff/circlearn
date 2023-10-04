@@ -1,9 +1,9 @@
-# Runding - Ruang Diskusi dan Bimbingan
+# Circlearn
 
-Front-End Project for Dicoding final capstone project
+An aplication made with MERN stack for Research Project 2
 
-Backend web RUNDING berbasis HTTP dan dibangun menggunakan framework Express.js. Source code backend ada pada link berikut [Runding Back-End](https://github.com/tristanbeykusuma/capstone-runding-back-end)
+Backend web CIRCLEARN Base HTTP and build with Express.js. framework Source code backend : [Circlearn Back-End](https://github.com/im-grifff/Circlearn-back-end)
 
-## Didukung Oleh
+## Supported by
 
-Dicoding Indonesia
+Computer Science, Universitas Klabas

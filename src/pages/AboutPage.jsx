@@ -35,25 +35,26 @@ export default function AboutPage() {
       {renderAccesibility()}
       <div className='container mx-auto px-2'>
         <div className='mb-5 lg:w-1/2'>
-          <h1 className='text-3xl font-semibold mb-3'>Apa itu Circlearn</h1>
+          <h1 className='text-3xl font-semibold mb-3'>What is Circlearn ? </h1>
           <p>
-            Circlearn merupakan sebuah media untuk bertukar pikiran secara
-            online dimana orang dari bebrbagai kalangan dapat memasukkan suatu
-            topik atau membuka ruang virtual untuk memulai percakapan dalam
-            bentuk pesan yang diposting.
+            Circlearn itself is an online learning discussion forum built on a
+            website platform using the MERN stack as its architecture. Circlearn
+            provides a virtual space for every user to engage in online
+            discussions on topics provided by the admin, aligned with the
+            subjects taught at Klaba University.
           </p>
         </div>
         <div>
-          <h1 className='text-3xl font-semibold mb-3'>Tim kami</h1>
-          <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-3 lg:gap-10'>
+          <h1 className='text-3xl font-semibold mb-3'>Developer</h1>
+          <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-3 lg:gap-10 '>
             <div className='flex flex-col justify-center items-center border-2 rounded-lg py-4 px-10 shadow-lg filter backdrop-blur-xl'>
               <img
                 src={profile}
                 alt='avatar'
                 className='w-40 h-40 object-cover rounded-full'
               />
-              <span className='font-medium mt-3'>Owen</span>
-              <p>Front-end, UI/UX</p>
+              <span className='font-medium mt-3'>Griffin Mumu</span>
+              <p>Developer</p>
               <div className='flex gap-3'>
                 <a
                   href='https://www.linkedin.com/in/owen-hermawan-0b1b1b1b9/'
@@ -68,50 +69,22 @@ export default function AboutPage() {
                   <i className='fab fa-instagram text-3xl text-primary-1' />
                 </a>
                 <a
-                  href='https://github.com/Sitouxz'
+                  href='https://github.com/im-grifff'
                   target='_blank'
                   rel='noreferrer'>
                   <i className='fab fa-github text-3xl text-primary-1' />
                 </a>
               </div>
             </div>
-            <div className='flex flex-col justify-center items-center border-2 rounded-lg py-4 px-10 shadow-lg filter backdrop-blur-xl'>
-              <img
-                src={profile3}
-                alt='avatar'
-                className='w-40 h-40 object-cover object-top rounded-full'
-              />
-              <span className='font-medium mt-3'>Tristan</span>
-              <p>Front-end, Backend</p>
-              <div className='flex gap-3'>
-                <a
-                  href='https://www.linkedin.com/in/tristan-kusuma-abb21917a/'
-                  target='_blank'
-                  rel='noreferrer'>
-                  <i className='fab fa-linkedin-in text-3xl text-primary-1' />
-                </a>
-                <a
-                  href='https://www.instagram.com/tristanbeyk/'
-                  target='_blank'
-                  rel='noreferrer'>
-                  <i className='fab fa-instagram text-3xl text-primary-1' />
-                </a>
-                <a
-                  href='https://github.com/tristanbeykusuma'
-                  target='_blank'
-                  rel='noreferrer'>
-                  <i className='fab fa-github text-3xl text-primary-1' />
-                </a>
-              </div>
-            </div>
+
             <div className='flex flex-col justify-center items-center border-2 rounded-lg py-4 px-10 shadow-lg filter backdrop-blur-xl'>
               <img
                 src={profile2}
                 alt='avatar'
                 className='w-40 h-40 object-cover rounded-full'
               />
-              <span className='font-medium mt-3'>Lara</span>
-              <p>Front-end</p>
+              <span className='font-medium mt-3'>Steny Pungus</span>
+              <p>Advisor</p>
               <div className='flex gap-3'>
                 <a
                   href='https://www.linkedin.com/'
@@ -127,35 +100,6 @@ export default function AboutPage() {
                 </a>
                 <a
                   href='https://github.com/laraedyanputri'
-                  target='_blank'
-                  rel='noreferrer'>
-                  <i className='fab fa-github text-3xl text-primary-1' />
-                </a>
-              </div>
-            </div>
-            <div className='flex flex-col justify-center items-center border-2 rounded-lg py-4 px-10 shadow-lg filter backdrop-blur-xl'>
-              <img
-                src={profile1}
-                alt='avatar'
-                className='w-40 h-40 object-cover object-top rounded-full'
-              />
-              <span className='font-medium mt-3'>Tria</span>
-              <p>Backend, UI/UX</p>
-              <div className='flex gap-3'>
-                <a
-                  href='https://www.linkedin.com/in/tri-adi-ningsih/'
-                  target='_blank'
-                  rel='noreferrer'>
-                  <i className='fab fa-linkedin-in text-3xl text-primary-1' />
-                </a>
-                <a
-                  href='https://www.instagram.com/'
-                  target='_blank'
-                  rel='noreferrer'>
-                  <i className='fab fa-instagram text-3xl text-primary-1' />
-                </a>
-                <a
-                  href='https://github.com/triadiningsih'
                   target='_blank'
                   rel='noreferrer'>
                   <i className='fab fa-github text-3xl text-primary-1' />
