@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
-import api from '../config/api';
-import Background from '../components/Background';
-import AccessibilityPopup from '../components/AccessibilityPopup';
-import BackgroundAccessible from '../components/BackgroundAccessible';
+import api from "../config/api";
+import Background from "../components/Background";
+import AccessibilityPopup from "../components/AccessibilityPopup";
+import BackgroundAccessible from "../components/BackgroundAccessible";
 
 export default function LoginPage() {
   const [passwordShown, setPasswordShown] = useState(false);
-  const [responseData, setResponseData] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [responseData, setResponseData] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [accessibility, setAccessibility] = useState(false);
 
   const renderAccesibility = () => {
@@ -24,9 +24,9 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
   }, []);
 
   const togglePasswordVisiblity = () => {
@@ -36,33 +36,33 @@ export default function LoginPage() {
   const LoginHandler = async (e) => {
     e.preventDefault();
     await api
-      .post('/user/login', {
+      .post("/user/login", {
         username,
-        password
+        password,
       })
       .then((response) => {
         setResponseData(response.data);
-        if (response.data.status === 'ok') {
-          localStorage.setItem('authenticated', true);
-          localStorage.setItem('token', response.data.data);
-          navigate('/ruang');
+        if (response.data.status === "ok") {
+          localStorage.setItem("authenticated", true);
+          localStorage.setItem("token", response.data.data);
+          navigate("/ruang");
         }
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
         console.log(error);
-        setResponseData({ message: 'Username atau password salah' });
+        setResponseData({ message: "Wrong username or password " });
       });
   };
 
   const userLogOut = () => {
-    localStorage.removeItem('authenticated');
-    localStorage.removeItem('token');
-    navigate('/login');
+    localStorage.removeItem("authenticated");
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   const userLoggedIn = () => {
-    const loggedIn = localStorage.getItem('authenticated');
+    const loggedIn = localStorage.getItem("authenticated");
     if (loggedIn) {
       return true;
     }
@@ -104,10 +104,8 @@ export default function LoginPage() {
       ) : (
         <div className='relative flex justify-center items-center h-screen overflow-hidden'>
           <div className='w-[385px] sm:w-[485px] bg-[#dbdbdb] bg-opacity-50 px-[44px] py-[65px] rounded-2xl backdrop-filter backdrop-blur-lg'>
-            <h1 className='text-[60px] font-bold text-primary-1'>Masuk</h1>
-            <p className='font-medium text-[15px]'>
-              Masuk dengan akun yang sudah terdaftar
-            </p>
+            <h1 className='text-[60px] font-bold text-primary-1'>Login</h1>
+            <p className='font-medium text-[15px]'>Login with your account</p>
             <form
               action='#'
               className='login-input mt-[75px]'
@@ -129,7 +127,7 @@ export default function LoginPage() {
                   id='password'
                   placeholder='Password'
                   onChange={(e) => setPassword(e.target.value)}
-                  type={passwordShown ? 'text' : 'password'}
+                  type={passwordShown ? "text" : "password"}
                   required
                 />
                 <div className='absolute inset-y-0 right-0 flex items-center px-2'>
@@ -160,16 +158,16 @@ export default function LoginPage() {
             </form>
             <div>
               <p className='text-[15px] text-center mt-[40px]'>
-                Belum punya akun?
+                Don’t have an account?
                 <a
                   href='/register'
                   className='text-primary-2 font-medium ml-[5px]'>
-                  Daftar sekarang
+                  Sign In Now !
                 </a>
               </p>
               <p className='text-center'>
                 <a className='text-primary-2' href='/'>
-                  Kembali ke Halaman Utama
+                  Back to home page
                 </a>
               </p>
             </div>

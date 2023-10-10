@@ -1,21 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Background from "../components/Background";
+import BackgroundAccessible from "../components/BackgroundAccessible";
+import AccessibilityPopup from "../components/AccessibilityPopup";
 
-import Background from '../components/Background';
-import BackgroundAccessible from '../components/BackgroundAccessible';
-import AccessibilityPopup from '../components/AccessibilityPopup';
-
-import api from '../config/api';
+import api from "../config/api";
 
 export default function LoginPage() {
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [responseData, setResponseData] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [responseData, setResponseData] = useState("");
   const [accessibility, setAccessibility] = useState(false);
 
   const renderAccesibility = () => {
@@ -28,9 +27,9 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
   }, []);
 
   const togglePasswordVisiblity = () => {
@@ -44,29 +43,29 @@ export default function LoginPage() {
   const RegisterHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setResponseData({ message: 'Password tidak sama' });
+      setResponseData({ message: "Password not match !" });
       return;
     }
-    if (username === '' || email === '' || password === '') {
-      setResponseData({ message: 'Semua field harus diisi' });
+    if (username === "" || email === "" || password === "") {
+      setResponseData({ message: "Semua field harus diisi" });
       return;
     }
     if (password.length < 7) {
-      setResponseData({ message: 'Password minimal 8 karakter' });
+      setResponseData({ message: "Password minumum 8 character" });
       return;
     }
 
     await api
-      .post('user/register', {
+      .post("user/register", {
         username,
         email,
-        password
+        password,
       })
       .then((response) => {
         setResponseData(response.data);
         // console.log(response.data);
-        if (response.data.status === 'ok') {
-          navigate('/login');
+        if (response.data.status === "ok") {
+          navigate("/login");
         }
       })
       .catch((error) => {
@@ -85,8 +84,8 @@ export default function LoginPage() {
       {renderAccesibility()}
       <div className='relative flex justify-center items-center h-screen overflow-hidden'>
         <div className='w-[385px] sm:w-[485px] bg-[#dbdbdb] bg-opacity-50 px-[44px] py-[65px] rounded-2xl backdrop-filter backdrop-blur-lg'>
-          <h1 className='text-[60px] font-bold text-primary-1'>Daftar</h1>
-          <p className='font-medium text-[15px]'>Buat akun baru di Runding</p>
+          <h1 className='text-[60px] font-bold text-primary-1'>Sign Up</h1>
+          <p className='font-medium text-[15px]'>Make a new account</p>
           <form
             action='#'
             className='login-input mt-[75px]'
@@ -117,7 +116,7 @@ export default function LoginPage() {
                 id='password'
                 placeholder='Password'
                 onChange={(e) => setPassword(e.target.value)}
-                type={passwordShown ? 'text' : 'password'}
+                type={passwordShown ? "text" : "password"}
               />
               <div className='absolute inset-y-0 right-0 flex items-center px-2'>
                 <button
@@ -139,7 +138,7 @@ export default function LoginPage() {
                 id='confirmPassword'
                 placeholder='Confirm password'
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                type={confirmPasswordShown ? 'text' : 'password'}
+                type={confirmPasswordShown ? "text" : "password"}
               />
               <div className='absolute inset-y-0 right-0 flex items-center px-2'>
                 <button
@@ -169,9 +168,9 @@ export default function LoginPage() {
           </form>
           <div>
             <p className='text-[15px] text-center mt-[40px]'>
-              Sudah punya akun?
+              Already have account ?
               <a href='/login' className='text-primary-2 font-medium ml-[5px]'>
-                Masuk sekarang
+                Login Now
               </a>
             </p>
           </div>

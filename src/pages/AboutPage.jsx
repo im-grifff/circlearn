@@ -3,10 +3,8 @@ import React, { useEffect, useState } from "react";
 import AccessibilityPopup from "../components/AccessibilityPopup";
 import Navbar from "../layouts/Navbar";
 import Background from "../components/Background";
-import profile from "../assets/img/profile.jpg";
-import profile1 from "../assets/img/profile1.jpg";
-import profile2 from "../assets/img/profile2.jpg";
-import profile3 from "../assets/img/profile3.jpg";
+import profile from "../assets/img/profileGriff.JPG";
+import profile2 from "../assets/img/profileGriff.JPG";
 import BackgroundAccessible from "../components/BackgroundAccessible";
 
 export default function AboutPage() {
@@ -41,7 +39,7 @@ export default function AboutPage() {
             website platform using the MERN stack as its architecture. Circlearn
             provides a virtual space for every user to engage in online
             discussions on topics provided by the admin, aligned with the
-            subjects taught at Klaba University.
+            subjects taught at Klabat University.
           </p>
         </div>
         <div>
@@ -57,13 +55,13 @@ export default function AboutPage() {
               <p>Developer</p>
               <div className='flex gap-3'>
                 <a
-                  href='https://www.linkedin.com/in/owen-hermawan-0b1b1b1b9/'
+                  href='https://www.linkedin.com/in/griffin-mumu-847262263/'
                   target='_blank'
                   rel='noreferrer'>
                   <i className='fab fa-linkedin-in text-3xl text-primary-1' />
                 </a>
                 <a
-                  href='https://www.instagram.com/sitouxz/'
+                  href='https://www.instagram.com/i.gryps/'
                   target='_blank'
                   rel='noreferrer'>
                   <i className='fab fa-instagram text-3xl text-primary-1' />
@@ -87,21 +85,18 @@ export default function AboutPage() {
               <p>Advisor</p>
               <div className='flex gap-3'>
                 <a
-                  href='https://www.linkedin.com/'
+                  href='https://www.linkedin.com/in/stenly-richard-pungus-79442251/'
                   target='_blank'
                   rel='noreferrer'>
                   <i className='fab fa-linkedin-in text-3xl text-primary-1' />
                 </a>
                 <a
-                  href='https://www.instagram.com/'
+                  href='https://www.instagram.com/sten_lyric_hards/'
                   target='_blank'
                   rel='noreferrer'>
                   <i className='fab fa-instagram text-3xl text-primary-1' />
                 </a>
-                <a
-                  href='https://github.com/laraedyanputri'
-                  target='_blank'
-                  rel='noreferrer'>
+                <a href='https://github.com/' target='_blank' rel='noreferrer'>
                   <i className='fab fa-github text-3xl text-primary-1' />
                 </a>
               </div>

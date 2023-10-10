@@ -3,36 +3,36 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable*/
 
-import React, { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Background from '../components/Background';
-import BackgroundAccessible from '../components/BackgroundAccessible';
-import Illustration from '../assets/img/Illustration.png';
-import AccessibilityPopup from '../components/AccessibilityPopup';
-import RandomFacts from '../components/RandomFacts';
+import React, { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Background from "../components/Background";
+import BackgroundAccessible from "../components/BackgroundAccessible";
+import Illustration from "../assets/img/Illustration.png";
+import AccessibilityPopup from "../components/AccessibilityPopup";
+import RandomFacts from "../components/RandomFacts";
 
-import logoImg from '../assets/img/logoImg.svg';
-import logoName from '../assets/img/logoName.svg';
-import logoNameWhite from '../assets/img/logoNameWhite.svg';
-import contactUsImg from '../assets/img/undraw_Messaging_fun_re_vic9 1.svg';
-import bgMask from '../assets/img/BG-Mask.svg';
-import ctaVector from '../assets/img/ctaVector.svg';
-import infoImg1 from '../assets/img/infoImg1.svg';
-import infoImg2 from '../assets/img/infoImg2.svg';
-import infoImg3 from '../assets/img/infoImg3.svg';
-import featureImg1 from '../assets/img/featureImg1.svg';
-import featureImg2 from '../assets/img/featureImg2.svg';
-import featureImg3 from '../assets/img/featureImg3.svg';
-import featureCardIcon from '../assets/img/featureCardIcon.png';
+import logoImg from "../assets/img/logoImg.svg";
+import logoName from "../assets/img/logoName.svg";
+import logoNameWhite from "../assets/img/logoNameWhite.svg";
+import contactUsImg from "../assets/img/undraw_Messaging_fun_re_vic9 1.svg";
+import bgMask from "../assets/img/BG-Mask.svg";
+import ctaVector from "../assets/img/ctaVector.svg";
+import infoImg1 from "../assets/img/infoImg1.svg";
+import infoImg2 from "../assets/img/infoImg2.svg";
+import infoImg3 from "../assets/img/infoImg3.svg";
+import featureImg1 from "../assets/img/featureImg1.svg";
+import featureImg2 from "../assets/img/featureImg2.svg";
+import featureImg3 from "../assets/img/featureImg3.svg";
+import featureCardIcon from "../assets/img/featureCardIcon.png";
 
 export default function LandingPage() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [accessibility, setAccessibility] = useState(false);
 
   useEffect(() => {
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
   }, []);
 
   // merender background aksesibilitas
@@ -45,45 +45,45 @@ export default function LandingPage() {
 
   const ctaBackground = {
     backgroundImage: `url(${bgMask})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
   };
 
   const infoData = [
     {
       imgSrc: infoImg1,
-      title: 'User Friendly',
+      title: "User Friendly",
       description:
-        'With Simple Style and Easy to use, make the learning experience more comfortable'
+        "With Simple Style and Easy to use, make the learning experience more comfortable",
     },
     {
       imgSrc: infoImg2,
-      title: 'Interactive Design',
+      title: "Interactive Design",
       description:
-        'Equipped with interactive designs and animations that make the learning process more interesting.'
+        "Equipped with interactive designs and animations that make the learning process more interesting.",
     },
     {
       imgSrc: infoImg3,
-      title: 'Interesting Features',
+      title: "Interesting Features",
       description:
-        'Many interesting features are provided to maximize the user experience and convenience in using Circlearn.'
-    }
+        "Many interesting features are provided to maximize the user experience and convenience in using Circlearn.",
+    },
   ];
 
   const data1 = [
     {
       icon: featureCardIcon,
-      title: 'Title Goes Here',
+      title: "Title Goes Here",
       description:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.'
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
     },
 
     {
       icon: featureCardIcon,
-      title: 'Title Goes Here',
+      title: "Title Goes Here",
       description:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.'
-    }
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
+    },
   ];
 
   return (
@@ -109,29 +109,29 @@ export default function LandingPage() {
             <div
               className={
                 // eslint-disable-next-line prefer-template, operator-linebreak
-                'lg:flex flex-grow items-start' +
-                (navbarOpen ? ' flex' : ' hidden')
+                "lg:flex flex-grow items-start" +
+                (navbarOpen ? " flex" : " hidden")
               }>
               <ul className='flex flex-col items-start justify-center lg:flex-row list-none lg:ml-auto mt-2'>
                 <li className='nav-item'>
                   <Link
                     className='px-3 py-2 text-md font-medium leading-snug text-primary-3 hover:opacity-75'
                     to='/'>
-                    Beranda
+                    Home
                   </Link>
                 </li>
                 <li className='nav-item'>
                   <Link
                     className='px-3 py-2 text-md font-medium leading-snug text-primary-3 hover:opacity-75'
                     to='/ruang'>
-                    Ruang Diskusi
+                    Discussion Room
                   </Link>
                 </li>
                 <li className='nav-item'>
                   <Link
                     className='px-3 py-2 text-md font-medium leading-snug text-primary-3 hover:opacity-75'
                     to='/about'>
-                    Tentang Kami
+                    About
                   </Link>
                 </li>
               </ul>
@@ -332,7 +332,7 @@ export default function LandingPage() {
           <hr className='border-white mt-5' />
           <div className='copyright text-white flex flex-col md:flex-row items-center justify-between py-5'>
             <p>
-              © 2020 <span className='font-bold'>Circlearn</span>. All rights
+              © 2023 <span className='font-bold'>Circlearn</span>. All rights
               reserved.
             </p>
             <div className='flex space-x-4 mt-3 md:mt-0'>

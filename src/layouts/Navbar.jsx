@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import logoImg from '../assets/img/logoImg.svg';
-import avatar from '../assets/img/avatar.png';
+import logoImg from "../assets/img/logoImg.svg";
+import avatar from "../assets/img/avatar.png";
 
 /* Navbar di tiap halaman aplikasi yang berisi navigasi ke halaman beranda, ruang diskusi,
    tentang kami, profile, dan notifikasi */
@@ -27,29 +27,29 @@ export default function Navbar() {
           <div
             className={
               // eslint-disable-next-line prefer-template, operator-linebreak
-              'flex-col-reverse lg:flex-row lg:flex flex-grow items-start lg:items-center' +
-              (navbarOpen ? ' flex' : ' hidden')
+              "flex-col-reverse lg:flex-row lg:flex flex-grow items-start lg:items-center" +
+              (navbarOpen ? " flex" : " hidden")
             }>
             <ul className='flex flex-col-reverse justify-center lg:items-center lg:flex-row list-none lg:ml-auto w-full lg:w-auto'>
               <li className='flex'>
                 <Link
                   className='w-full py-3 lg:mr-3 px-1 text-lg font-medium leading-snug text-primary-3 hover:bg-slate-200'
                   to='/'>
-                  Beranda
+                  Home
                 </Link>
               </li>
               <li className='flex'>
                 <Link
                   className='w-full py-3 lg:mr-3 px-1 text-lg font-medium leading-snug text-primary-3 hover:bg-slate-200'
                   to='/ruang'>
-                  Ruang Diskusi
+                  Discussion Room
                 </Link>
               </li>
               <li className='flex'>
                 <Link
                   className='w-full py-3 lg:mr-3 px-1 text-lg font-medium leading-snug text-primary-3 hover:bg-slate-200'
                   to='/about'>
-                  Tentang Kami
+                  About
                 </Link>
               </li>
             </ul>
