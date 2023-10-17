@@ -93,7 +93,7 @@ export default function RuangPage() {
             className='flex-grow flex flex-col sm:flex-row'>
             <input
               type='text'
-              placeholder='Cari ruang diskusi'
+              placeholder='Search Rooms'
               className='border-2 border-primary-1 rounded-lg flex-grow py-1 px-2 ml-1 sm:ml-auto'
               value={searchTerm}
               onChange={handleChange}
@@ -109,8 +109,8 @@ export default function RuangPage() {
       <div className='container mx-auto px-2 mt-4'>
         <div className='flex justify-between mb-3'>
           <h2 className='font-semibold mt-auto mb-auto'>
-            Daftar
-            <span className='text-primary-1'> Ruang Diskusi</span>
+            List
+            <span className='text-primary-1'> My Rooms</span>
           </h2>
           <button
             onClick={() => {
