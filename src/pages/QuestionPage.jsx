@@ -160,9 +160,7 @@ export default function QuestionPage() {
             nested>
             {(close) => (
               <form className='bg-white rounded-lg shadow-lg p-4 m-4 max-h-screen pb-24 overflow-scroll lg:overflow-auto'>
-                <h2 className='font-semibold text-xl mb-4'>
-                  Ajukan pertanyaan
-                </h2>
+                <h2 className='font-semibold text-xl mb-4'>Ask a question</h2>
                 <div>
                   <p>Cara mengajukan pertanyaan:</p>
                   <ol className='list-decimal list-inside'>
@@ -189,7 +187,7 @@ export default function QuestionPage() {
                   <label
                     htmlFor='title'
                     className='font-semibold text-primary-1 text-lg'>
-                    Judul pertanyaan
+                    Title
                   </label>
                   <input
                     type='text'
@@ -203,7 +201,7 @@ export default function QuestionPage() {
                   <label
                     htmlFor='description'
                     className='font-semibold text-primary-1 text-lg'>
-                    Tuliskan pertanyaanmu
+                    Write your question
                   </label>
 
                   <textarea
@@ -217,9 +215,9 @@ export default function QuestionPage() {
                   <label
                     htmlFor='tags'
                     className='font-semibold text-primary-1 text-lg'>
-                    Tambahkan kata kunci
+                    Add Keywords
                   </label>
-                  <span> *minimal 3 kata kunci (dipisah koma)</span>
+                  <span> *minimal 3 keywords. use ‘,’ to seprate</span>
                   <input
                     type='text'
                     id='tags'
@@ -235,13 +233,13 @@ export default function QuestionPage() {
                     onClick={() => {
                       close();
                     }}>
-                    Batal
+                    Cancel
                   </button>
                   <button
                     type='button'
                     className='py-2 px-6 sm:px-10 bg-primary-1 shadow-lg shadow-primary-1 rounded-md mt-2 lg:mt-0 lg:ml-2 text-white'
                     onClick={handleCreateQuestion}>
-                    Buat Diskusi
+                    Create
                   </button>
                 </div>
               </form>
@@ -265,9 +263,7 @@ export default function QuestionPage() {
           ) : (
             data.length === 0 ?? (
               <div className='flex justify-center items-center pt-20'>
-                <p className='text-center text-primary-1'>
-                  Belum ada pertanyaan yang diajukan
-                </p>
+                <p className='text-center text-primary-1'>No question yet</p>
               </div>
             )
           )}
