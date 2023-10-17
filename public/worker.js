@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-restricted-globals */
-const CACHE_NAME = "runding-web";
+const CACHE_NAME = "circlearn-web";
 const urlsToCache = ["/", "/ruang", "/about"];
 
 // Install a service worker
@@ -29,7 +29,7 @@ self.addEventListener("fetch", (event) => {
 
 // Update a service worker
 self.addEventListener("activate", (event) => {
-  const cacheWhitelist = ["runding-web"];
+  const cacheWhitelist = ["circlearn-web"];
   event.waitUntil(
     caches.keys().then((cacheNames) =>
       Promise.all(
