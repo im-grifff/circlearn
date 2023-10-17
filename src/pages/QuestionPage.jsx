@@ -4,35 +4,35 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-wrap-multilines */
-import React, { useState, useEffect } from 'react';
-import Popup from 'reactjs-popup';
-import { useParams, Link } from 'react-router-dom';
-import AccessibilityPopup from '../components/AccessibilityPopup';
-import Navbar from '../layouts/Navbar';
-import Background from '../components/Background';
-import QuestionCard from '../components/QuestionCard';
-import BackgroundAccessible from '../components/BackgroundAccessible';
+import React, { useState, useEffect } from "react";
+import Popup from "reactjs-popup";
+import { useParams, Link } from "react-router-dom";
+import AccessibilityPopup from "../components/AccessibilityPopup";
+import Navbar from "../layouts/Navbar";
+import Background from "../components/Background";
+import QuestionCard from "../components/QuestionCard";
+import BackgroundAccessible from "../components/BackgroundAccessible";
 
-import api from '../config/api';
+import api from "../config/api";
 
 export default function QuestionPage() {
   const [accessibility, setAccessibility] = useState(false);
   const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [createQuestionForm, setCreateQuestionForm] = useState({
-    title: '',
-    description: '',
-    keyword: []
+    title: "",
+    description: "",
+    keyword: [],
   });
 
   const param = useParams();
 
   useEffect(() => {
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
   }, []);
 
   const renderAccesibility = () => {
@@ -43,12 +43,12 @@ export default function QuestionPage() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
       .get(`/runding/posts/${param.id}`, {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         setData(response.data.data);
@@ -65,19 +65,19 @@ export default function QuestionPage() {
 
   const handleCreateQuestion = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
       .post(
         `/runding/posts/create/${param.id}`,
         {
           title_form: createQuestionForm.title,
           description_form: createQuestionForm.description,
-          tags_form: createQuestionForm.keyword
+          tags_form: createQuestionForm.keyword,
         },
         {
           headers: {
-            'auth-token': token // the token is a variable which holds the token
-          }
+            "auth-token": token, // the token is a variable which holds the token
+          },
         }
       )
       .then((response) => {
@@ -92,17 +92,17 @@ export default function QuestionPage() {
   };
 
   const handleCreateQuestionForm = (e) => {
-    if (e.target.name === 'keyword') {
-      const keyword = e.target.value.split(',');
+    if (e.target.name === "keyword") {
+      const keyword = e.target.value.split(",");
       setCreateQuestionForm({
         ...createQuestionForm,
-        [e.target.name]: keyword
+        [e.target.name]: keyword,
       });
       return;
     }
     setCreateQuestionForm({
       ...createQuestionForm,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -111,7 +111,7 @@ export default function QuestionPage() {
   };
 
   const handleSubmit = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       setSearchData(data);
       // eslint-disable-next-line array-callback-return, max-len
@@ -120,7 +120,7 @@ export default function QuestionPage() {
       );
       setSearchData(newResults);
 
-      setSearchTerm('');
+      setSearchTerm("");
     }
   };
 
@@ -134,7 +134,7 @@ export default function QuestionPage() {
       {renderAccesibility()}
       <div className='container mx-auto px-2 m-4'>
         <Link to={`/ruang/${param.id}`} className='py-3'>
-          {'< Kembali'}
+          {"< Kembali"}
         </Link>
         <div className='flex flex-col lg:flex-row'>
           <input
@@ -147,13 +147,13 @@ export default function QuestionPage() {
           />
         </div>
         <div>
-          <h2 className='font-semibold mb-3 mt-2'>Semua Pertanyaan</h2>
+          <h2 className='font-semibold mb-3 mt-2'>All Question</h2>
           <Popup
             trigger={
               <button
                 type='button'
                 className='py-1 px-6 sm:px-10 bg-primary-1 rounded-md mt-1 lg:mt-0 lg:ml-1 text-white'>
-                Buat Pertanyaan Baru
+                NEW
               </button>
             }
             modal

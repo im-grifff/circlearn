@@ -1,16 +1,16 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import api from '../config/api';
+import api from "../config/api";
 
-import AccessibilityPopup from '../components/AccessibilityPopup';
-import Background from '../components/Background';
-import Navbar from '../layouts/Navbar';
-import RandomFacts from '../components/RandomFacts';
-import BackgroundAccessible from '../components/BackgroundAccessible';
+import AccessibilityPopup from "../components/AccessibilityPopup";
+import Background from "../components/Background";
+import Navbar from "../layouts/Navbar";
+import RandomFacts from "../components/RandomFacts";
+import BackgroundAccessible from "../components/BackgroundAccessible";
 
-import avatarBig from '../assets/img/avatarBig.png';
+import avatarBig from "../assets/img/avatarBig.png";
 
 export default function ProfilePage() {
   const [accessibility, setAccessibility] = useState(false);
@@ -20,12 +20,12 @@ export default function ProfilePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
-      .get('/user/data', {
+      .get("/user/data", {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         setDataUser(response.data);
@@ -37,9 +37,9 @@ export default function ProfilePage() {
         // eslint-disable-next-line no-console
         console.log(error);
       });
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
   }, []);
 
   const renderAccesibility = () => {
@@ -63,7 +63,7 @@ export default function ProfilePage() {
         </div>
         <div className='col-span-2 ml-3 mt-5'>
           <h2 className='mb-4 font-semibold text-xl text-primary-1'>
-            Informasi Pengguna
+            User Information
           </h2>
           {(() => {
             if (loading) {
@@ -74,14 +74,14 @@ export default function ProfilePage() {
               );
             }
 
-            if (dataUser.status === 'ok') {
+            if (dataUser.status === "ok") {
               return (
                 <div className=' mt-2 text-primary-3'>
                   <p className='mb-1'>{`Username : ${
-                    dataUser.data.username || 'no username'
+                    dataUser.data.username || "no username"
                   }`}</p>
                   <p className='mb-1'>{`E-mail : ${
-                    dataUser.data.email || 'no email'
+                    dataUser.data.email || "no email"
                   }`}</p>
                   <p className='mb-1'>{`ID User : ${dataUser.data._id}`}</p>
                   <p className='mb-1 mt-3'>Jumlah Kelas :</p>
@@ -100,7 +100,7 @@ export default function ProfilePage() {
           <div className='flex flex-col lg:flex-row items-center lg:items-start gap-3 mb-10'>
             <button
               onClick={() => {
-                navigate('/manage');
+                navigate("/manage");
               }}
               type='button'
               className='flex justify-end items-center text-white w-[130px] h-[68px] mt-[40px] bg-primary-2 text-[15px] font-medium p-0 rounded-[14px] relative hover:shadow-primary-1 shadow-2xl'>
@@ -108,7 +108,7 @@ export default function ProfilePage() {
             </button>
             <button
               onClick={() => {
-                navigate('/joined');
+                navigate("/joined");
               }}
               type='button'
               className='flex justify-end items-center text-white w-[160px] h-[68px] mt-[40px] bg-primary-2 text-[15px] font-medium p-0 rounded-[17px] relative hover:shadow-primary-1 shadow-2xl'>

@@ -27,13 +27,13 @@ export default function MyGroupCard({ discussionRoom }) {
               <span className="text-primary-1 font-medium">
                 {peserta.length <= 0 ? '0 ' : `${peserta.length} `}
                 {' '}
-                Anggota
+                Member
               </span>
             </div>
             <div className="flex items-center">
               <i className="fa-solid fa-users mr-3 w-5 h-5 flex justify-center items-center text-xl" />
               <span className="font-medium">
-                Dibuat oleh
+                Made by
                 <span className="text-primary-1">{` ${admin_username[0]}`}</span>
               </span>
             </div>
@@ -63,7 +63,7 @@ export default function MyGroupCard({ discussionRoom }) {
             onClick={() => navigate(`/ruang/question/${_id}`)}
             className="bg-primary-1 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1"
           >
-            Lihat Pertanyaan
+            See Question
           </button>
         </div>
       </div>

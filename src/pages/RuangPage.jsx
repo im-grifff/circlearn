@@ -10,21 +10,21 @@
 /* eslint-disable no-else-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-wrap-multilines */
-import React, { useState, useEffect } from 'react';
-import Popup from 'reactjs-popup';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import Popup from "reactjs-popup";
+import { useNavigate } from "react-router-dom";
 
-import AccessibilityPopup from '../components/AccessibilityPopup';
-import Navbar from '../layouts/Navbar';
-import Background from '../components/Background';
-import DiscussionRoomCard from '../components/DiscussionRoomCard';
-import BackgroundAccessible from '../components/BackgroundAccessible';
+import AccessibilityPopup from "../components/AccessibilityPopup";
+import Navbar from "../layouts/Navbar";
+import Background from "../components/Background";
+import DiscussionRoomCard from "../components/DiscussionRoomCard";
+import BackgroundAccessible from "../components/BackgroundAccessible";
 
-import api from '../config/api';
+import api from "../config/api";
 
 export default function RuangPage() {
   const [discussionRooms, setDiscussionRooms] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [accessibility, setAccessibility] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -39,12 +39,12 @@ export default function RuangPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
-      .get('/runding', {
+      .get("/runding", {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         setDiscussionRooms(response.data.data);
@@ -55,9 +55,9 @@ export default function RuangPage() {
         // eslint-disable-next-line no-console
         console.log(error);
       });
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
   }, []);
 
   // search function for discussion rooms
@@ -71,7 +71,7 @@ export default function RuangPage() {
     );
     setSearchResults(newResults);
 
-    setSearchTerm('');
+    setSearchTerm("");
   };
 
   const handleChange = (e) => {
@@ -101,7 +101,7 @@ export default function RuangPage() {
             <button
               type='submit'
               className='py-2 px-6 sm:px-10 bg-primary-1 rounded-md mt-2 sm:mt-auto ml-2 text-white hover:shadow-primary-1 shadow-lg'>
-              Cari
+              Search
             </button>
           </form>
         </div>
@@ -114,11 +114,11 @@ export default function RuangPage() {
           </h2>
           <button
             onClick={() => {
-              navigate('/create');
+              navigate("/create");
             }}
             type='button'
             className='flex justify-center items-center text-center text-white ml-[7px] w-[120px] h-[40px] bg-primary-2 text-[15px] font-medium p-0 rounded-lg hover:shadow-primary-1 shadow-lg'>
-            Buat Ruang
+            NEW
           </button>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
