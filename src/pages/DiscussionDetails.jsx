@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable comma-dangle */
-import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import Navbar from "../layouts/Navbar";
-import Background from "../components/Background";
-import avatar from "../assets/img/avatar.png";
-import AccessibilityPopup from "../components/AccessibilityPopup";
-import BackgroundAccessible from "../components/BackgroundAccessible";
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import Navbar from '../layouts/Navbar';
+import Background from '../components/Background';
+import avatar from '../assets/img/avatar.png';
+import AccessibilityPopup from '../components/AccessibilityPopup';
+import BackgroundAccessible from '../components/BackgroundAccessible';
 
-import api from "../config/api";
+import api from '../config/api';
 
 export default function DiscussionDetails() {
   const [accessibility, setAccessibility] = useState(false);
@@ -19,9 +19,9 @@ export default function DiscussionDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.setProperty("--color-primary", "#00adb5");
-    document.body.style.setProperty("--color-secondary", "#636499");
-    document.body.style.setProperty("--color-tertiary", "#121225");
+    document.body.style.setProperty('--color-primary', '#00adb5');
+    document.body.style.setProperty('--color-secondary', '#636499');
+    document.body.style.setProperty('--color-tertiary', '#121225');
   }, []);
 
   const renderAccesibility = () => {
@@ -32,12 +32,12 @@ export default function DiscussionDetails() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     api
       .get(`/runding/${params.id}`, {
         headers: {
-          "auth-token": token, // the token is a variable which holds the token
-        },
+          'auth-token': token // the token is a variable which holds the token
+        }
       })
       .then((response) => {
         setData(response.data);
@@ -52,12 +52,12 @@ export default function DiscussionDetails() {
   }, []);
 
   const userJoin = () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     api
-      .put(`/runding/join/${params.id}`, "mytoken", {
+      .put(`/runding/join/${params.id}`, 'mytoken', {
         headers: {
-          "auth-token": token, // the token is a variable which holds the token
-        },
+          'auth-token': token // the token is a variable which holds the token
+        }
       })
       .then(() => {
         // eslint-disable-next-line no-console
@@ -71,12 +71,12 @@ export default function DiscussionDetails() {
   };
 
   const userLeave = () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     api
-      .put(`/runding/leave/${params.id}`, "mytoken", {
+      .put(`/runding/leave/${params.id}`, 'mytoken', {
         headers: {
-          "auth-token": token, // the token is a variable which holds the token
-        },
+          'auth-token': token // the token is a variable which holds the token
+        }
       })
       .then(() => {
         // eslint-disable-next-line no-console
@@ -99,7 +99,7 @@ export default function DiscussionDetails() {
       {renderAccesibility()}
       <div className='container mx-auto px-2 mt-4'>
         <Link to='/ruang' className='py-3'>
-          {"< Back"}
+          {'< Back'}
         </Link>
         {loading ? (
           <div className='flex justify-center items-center pt-20'>
@@ -126,7 +126,7 @@ export default function DiscussionDetails() {
                     {`${
                       data.data.peserta !== undefined
                         ? data.data.peserta.length
-                        : "0"
+                        : '0'
                     } Member`}
                   </span>
                 </div>
@@ -135,7 +135,7 @@ export default function DiscussionDetails() {
                   <span className='font-medium'>
                     Made by
                     <span className='text-primary-1'>
-                      {" "}
+                      {' '}
                       {data.data.admin_username}
                     </span>
                   </span>
@@ -149,17 +149,17 @@ export default function DiscussionDetails() {
                   </span>
                 </div>
               ) : (
-                ""
+                ''
               )}
             </div>
             <div className='mt-5'>
-              <p>{data.data.deskripsi || ""}</p>
+              <p>{data.data.deskripsi || ''}</p>
             </div>
             <div className='mt-5'>
               {(() => {
                 if (data.member || data.author) {
                   return (
-                    <p>{`Meeting : ${data.data.meetTime || "Coming Soon"}`}</p>
+                    <p>{`Meeting : ${data.data.meetTime || 'Coming Soon'}`}</p>
                   );
                 }
 
@@ -167,6 +167,19 @@ export default function DiscussionDetails() {
               })()}
             </div>
             <div className='mt-5 text-end'>
+              <button
+                type='button'
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `localhost:3000/ruang/${params.id}`
+                  );
+
+                  // eslint-disable-next-line no-alert
+                  alert('Link Copied');
+                }}
+                className='bg-primary-1 mr-2 ml-2 mb-2 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1'>
+                Share
+              </button>
               <button
                 type='button'
                 onClick={() => navigate(`/ruang/admininfo/${params.id}`)}
@@ -182,8 +195,8 @@ export default function DiscussionDetails() {
                         onClick={() => {
                           window.open(
                             `${data.data.meetLink}`,
-                            "_blank",
-                            "noopener,noreferrer"
+                            '_blank',
+                            'noopener,noreferrer'
                           );
                         }}
                         className='bg-primary-1 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1 mr-3'>

@@ -202,6 +202,21 @@ export default function QuestionDetailPage() {
                 {renderReply()}
               </div>
             </div>
+            <div>
+              <button
+                type='button'
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `localhost:3000/question/detail/${param.id}`
+                  );
+
+                  // eslint-disable-next-line no-alert
+                  alert('Link Copied');
+                }}
+                className='bg-primary-1 mr-2 ml-2 mb-2 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1'>
+                Share
+              </button>
+            </div>
           </div>
           <div className='flex flex-col gap-3 border-b border-primary-1 pb-3 justify-between items-center lg:items-start mt-3 '>
             <div className=' mt-3 lg:mt-0 text-center lg:text-start'>
