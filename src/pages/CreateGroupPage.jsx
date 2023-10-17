@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
-import api from '../config/api';
+import api from "../config/api";
 
-import AccessibilityPopup from '../components/AccessibilityPopup';
-import Navbar from '../layouts/Navbar';
-import Background from '../components/Background';
-import BackgroundAccessible from '../components/BackgroundAccessible';
+import AccessibilityPopup from "../components/AccessibilityPopup";
+import Navbar from "../layouts/Navbar";
+import Background from "../components/Background";
+import BackgroundAccessible from "../components/BackgroundAccessible";
 
-import avatarBig from '../assets/img/avatarBig.png';
+import avatarBig from "../assets/img/avatarBig.png";
 
 /* dalam create ruang diskusi baru, jika user tidak mengupload image, maka akan mengambil
    random image dari unsplash stock image website sebagai image group */
@@ -16,17 +16,17 @@ export default function CreateGroup() {
   const [accessibility, setAccessibility] = useState(false);
   const [file, setFile] = useState(null);
   const [filesrc, setFileSrc] = useState(null);
-  const [subjectform, setSubject] = useState('');
-  const [deskripsiform, setDeskripsi] = useState('');
-  const [jenisform, setJenis] = useState('');
+  const [subjectform, setSubject] = useState("");
+  const [deskripsiform, setDeskripsi] = useState("");
+  const [jenisform, setJenis] = useState("");
 
   const ref = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
     setFileSrc(avatarBig);
   }, []);
 
@@ -45,50 +45,50 @@ export default function CreateGroup() {
   };
 
   const reset = () => {
-    ref.current.value = '';
+    ref.current.value = "";
   };
 
   const CreateHandler = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const formData = new FormData();
 
-    if (subjectform === '' || deskripsiform === '' || jenisform === '') {
+    if (subjectform === "" || deskripsiform === "" || jenisform === "") {
       // eslint-disable-next-line no-console
-      console.log('Maaf, data kurang lengkap untuk membuat ruang diskusi baru');
+      console.log("Maaf, data kurang lengkap untuk membuat ruang diskusi baru");
       return;
     }
 
     if (file == null) {
-      await fetch('https://source.unsplash.com/random/500x300?landscape')
+      await fetch("https://source.unsplash.com/random/500x300?landscape")
         .then((res) => res.blob())
         .then((blob) => {
           const nowDate = Date.now().toString();
           const filerandom = new File([blob], `random-${nowDate}.png`, {
-            type: 'image/png'
+            type: "image/png",
           });
-          formData.append('logo_form', filerandom);
+          formData.append("logo_form", filerandom);
         });
     } else {
-      formData.append('logo_form', file);
+      formData.append("logo_form", file);
     }
 
-    formData.append('subject_form', subjectform);
+    formData.append("subject_form", subjectform);
 
-    formData.append('deskripsi_form', deskripsiform);
+    formData.append("deskripsi_form", deskripsiform);
 
-    formData.append('jenis_form', jenisform);
+    formData.append("jenis_form", jenisform);
 
     await api
-      .post('/runding/create', formData, {
+      .post("/runding/create", formData, {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         // eslint-disable-next-line no-console
         console.log(response.data);
-        navigate('/ruang');
+        navigate("/ruang");
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
@@ -106,7 +106,7 @@ export default function CreateGroup() {
       {renderAccesibility()}
       <div className='container mx-auto px-2 mt-4 mb-10'>
         <Link to='/ruang' className='py-3'>
-          {'< Kembali'}
+          {"< Back"}
         </Link>
         <form action='#' onSubmit={CreateHandler}>
           <div className='flex flex-col justify-center items-center gap-3 w-full mt-3'>
@@ -135,10 +135,10 @@ export default function CreateGroup() {
           </div>
           <div className='flex flex-col gap-3 mt-3'>
             <label htmlFor='name' className='font-semibold text-lg'>
-              Subjek Grup
+              Room Name
               <span className='font-normal text-sm text-red-500 ml-1'>
-                *pastikan anda menuliskan subjek grup dengan benar, sebagai
-                contoh = Komunitas Grup Phyton
+                *Make sure you write the group subject correctly, for example:
+                Python Group Community
               </span>
             </label>
             <input
@@ -151,10 +151,9 @@ export default function CreateGroup() {
           </div>
           <div className='flex flex-col gap-3 mt-3'>
             <label htmlFor='name' className='font-semibold text-lg'>
-              Deskripsi grup
+              Room Description
               <span className='font-normal text-sm text-red-500 ml-1'>
-                *tuliskan secara jelas kegunaan grup yang akan Anda buat atau
-                materi awal grup
+                *write clearly the purpose of the group you will create
               </span>
             </label>
             <textarea
@@ -168,7 +167,7 @@ export default function CreateGroup() {
           </div>
           <div className='flex flex-col gap-3 mt-3'>
             <label htmlFor='name' className='font-semibold text-lg'>
-              Jenis Grup
+              Subject
               <span className='font-normal text-sm text-red-500 ml-1'>
                 *tuliskan jenis diskusi meliputi : Sains, Teknologi,
                 Programming, Agrikultur, Bisnis, Kesehatan, Debat, Hiburan,
@@ -187,7 +186,7 @@ export default function CreateGroup() {
             <button
               type='submit'
               className='bg-primary-1 text-white py-2 px-10 rounded-lg shadow-lg shadow-primary-1'>
-              Buat Grup
+              CREATE NEW
             </button>
           </div>
         </form>
