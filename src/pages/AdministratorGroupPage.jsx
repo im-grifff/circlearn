@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-import api from '../config/api';
+import api from "../config/api";
 
-import AccessibilityPopup from '../components/AccessibilityPopup';
-import Navbar from '../layouts/Navbar';
-import Background from '../components/Background';
-import BackgroundAccessible from '../components/BackgroundAccessible';
+import AccessibilityPopup from "../components/AccessibilityPopup";
+import Navbar from "../layouts/Navbar";
+import Background from "../components/Background";
+import BackgroundAccessible from "../components/BackgroundAccessible";
 
 export default function AdministragorGroupPage() {
   const [accessibility, setAccessibility] = useState(false);
   const [dataAdmin, setDataAdmin] = useState([]);
-  const [meetingform, setMeetingForm] = useState('');
+  const [meetingform, setMeetingForm] = useState("");
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
@@ -19,12 +19,12 @@ export default function AdministragorGroupPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
       .get(`/runding/administrator/${params.id}`, {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         setDataAdmin(response.data);
@@ -34,9 +34,9 @@ export default function AdministragorGroupPage() {
         // eslint-disable-next-line no-console
         console.log(error);
       });
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
   }, []);
 
   const renderAccesibility = () => {
@@ -49,17 +49,17 @@ export default function AdministragorGroupPage() {
   const newMeeting = (e) => {
     e.preventDefault();
     if (meetingform) {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       api
         .put(
           `/runding/newmeeting/${params.id}`,
           {
-            meeting_form: meetingform
+            meeting_form: meetingform,
           },
           {
             headers: {
-              'auth-token': token // the token is a variable which holds the token
-            }
+              "auth-token": token, // the token is a variable which holds the token
+            },
           }
         )
         .then((response) => {
@@ -75,12 +75,12 @@ export default function AdministragorGroupPage() {
   };
 
   const removeMeeting = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
-      .put(`/runding/removemeeting/${params.id}`, 'mytoken', {
+      .put(`/runding/removemeeting/${params.id}`, "mytoken", {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         // eslint-disable-next-line no-console
@@ -94,17 +94,17 @@ export default function AdministragorGroupPage() {
   };
 
   const deleteRunding = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
       .delete(`/runding/${params.id}`, {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         // eslint-disable-next-line no-console
         console.log(response.data);
-        navigate('/ruang');
+        navigate("/ruang");
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
@@ -122,7 +122,7 @@ export default function AdministragorGroupPage() {
       {renderAccesibility()}
       <div className='container mx-auto px-2 mt-4'>
         <Link to={`/ruang/${params.id}`} className='py-3'>
-          {'< Kembali'}
+          {"< Back"}
         </Link>
         <div className='mt-3 bg-white shadow-lg border-2 rounded-lg p-3'>
           <div className='mt-2'>
@@ -148,8 +148,8 @@ export default function AdministragorGroupPage() {
                         href='https://meet.google.com/new'
                         target='_blank'
                         rel='noopener noreferrer'>
-                        {' '}
-                        here{' '}
+                        {" "}
+                        here{" "}
                       </a>
                       to open new google meet (check the join link)
                     </p>
@@ -227,7 +227,7 @@ export default function AdministragorGroupPage() {
                                     // eslint-disable-next-line no-console
                                     onClick={() => {
                                       setShowModal(false);
-                                      console.log('Delete canceled');
+                                      console.log("Delete canceled");
                                     }}>
                                     Cancel
                                   </button>

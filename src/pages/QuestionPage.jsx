@@ -134,7 +134,7 @@ export default function QuestionPage() {
       {renderAccesibility()}
       <div className='container mx-auto px-2 m-4'>
         <Link to={`/ruang/${param.id}`} className='py-3'>
-          {"< Kembali"}
+          {"< Back"}
         </Link>
         <div className='flex flex-col lg:flex-row'>
           <input
