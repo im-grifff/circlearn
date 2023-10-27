@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
-import api from "../config/api";
-import Background from "../components/Background";
-import AccessibilityPopup from "../components/AccessibilityPopup";
-import BackgroundAccessible from "../components/BackgroundAccessible";
+import api from '../config/api';
+import Background from '../components/Background';
+import AccessibilityPopup from '../components/AccessibilityPopup';
+import BackgroundAccessible from '../components/BackgroundAccessible';
 
 export default function LoginPage() {
   const [passwordShown, setPasswordShown] = useState(false);
-  const [responseData, setResponseData] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [responseData, setResponseData] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [accessibility, setAccessibility] = useState(false);
 
   const renderAccesibility = () => {
@@ -24,9 +24,9 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.setProperty("--color-primary", "#00adb5");
-    document.body.style.setProperty("--color-secondary", "#636499");
-    document.body.style.setProperty("--color-tertiary", "#121225");
+    document.body.style.setProperty('--color-primary', '#00adb5');
+    document.body.style.setProperty('--color-secondary', '#636499');
+    document.body.style.setProperty('--color-tertiary', '#121225');
   }, []);
 
   const togglePasswordVisiblity = () => {
@@ -35,34 +35,40 @@ export default function LoginPage() {
 
   const LoginHandler = async (e) => {
     e.preventDefault();
+
     await api
-      .post("/user/login", {
+      .post('/user/login', {
         username,
-        password,
+        password
       })
       .then((response) => {
         setResponseData(response.data);
-        if (response.data.status === "ok") {
-          localStorage.setItem("authenticated", true);
-          localStorage.setItem("token", response.data.data);
-          navigate("/ruang");
+        if (response.data.status === 'ok') {
+          localStorage.setItem('authenticated', true);
+          localStorage.setItem('token', response.data.data);
+          if (username === 'admin' && password === 'adminadmin') {
+            window.location.href =
+              'http://localhost:3001/admin/default?token=' + response.data.data;
+            return;
+          }
+          navigate('/ruang');
         }
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
         console.log(error);
-        setResponseData({ message: "Wrong username or password " });
+        setResponseData({ message: 'Wrong username or password ' });
       });
   };
 
   const userLogOut = () => {
-    localStorage.removeItem("authenticated");
-    localStorage.removeItem("token");
-    navigate("/login");
+    localStorage.removeItem('authenticated');
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
   const userLoggedIn = () => {
-    const loggedIn = localStorage.getItem("authenticated");
+    const loggedIn = localStorage.getItem('authenticated');
     if (loggedIn) {
       return true;
     }
@@ -77,7 +83,7 @@ export default function LoginPage() {
       />
       {renderAccesibility()}
       {userLoggedIn() ? (
-        <div className='relative flex justify-center items-center h-screen overflow-hidden'>
+        <div className='relative flex items-center justify-center h-screen overflow-hidden'>
           <div className='w-[385px] sm:w-[485px] bg-[#dbdbdb] bg-opacity-50 px-[44px] py-[65px] rounded-2xl backdrop-filter backdrop-blur-lg'>
             <h1 className='text-[45px] font-bold text-primary-1'>
               User Logged In
@@ -95,14 +101,14 @@ export default function LoginPage() {
               <button
                 onClick={() => userLogOut()}
                 type='button'
-                className='bg-primary-1 text-white py-3 rounded-md mt-4 w-full'>
+                className='w-full py-3 mt-4 text-white rounded-md bg-primary-1'>
                 Log Out
               </button>
             </div>
           </div>
         </div>
       ) : (
-        <div className='relative flex justify-center items-center h-screen overflow-hidden'>
+        <div className='relative flex items-center justify-center h-screen overflow-hidden'>
           <div className='w-[385px] sm:w-[485px] bg-[#dbdbdb] bg-opacity-50 px-[44px] py-[65px] rounded-2xl backdrop-filter backdrop-blur-lg'>
             <h1 className='text-[60px] font-bold text-primary-1'>Login</h1>
             <p className='font-medium text-[15px]'>Login with your account</p>
@@ -127,13 +133,13 @@ export default function LoginPage() {
                   id='password'
                   placeholder='Password'
                   onChange={(e) => setPassword(e.target.value)}
-                  type={passwordShown ? "text" : "password"}
+                  type={passwordShown ? 'text' : 'password'}
                   required
                 />
                 <div className='absolute inset-y-0 right-0 flex items-center px-2'>
                   <button
                     type='button'
-                    className='rounded text-sm font-mono cursor-pointer js-password-label underline'
+                    className='font-mono text-sm underline rounded cursor-pointer js-password-label'
                     htmlFor='toggle'
                     onClick={togglePasswordVisiblity}>
                     {passwordShown ? (
@@ -145,14 +151,14 @@ export default function LoginPage() {
                 </div>
               </div>
               {responseData.message && (
-                <p className='text-red-500 text-sm mt-3'>
+                <p className='mt-3 text-sm text-red-500'>
                   {responseData.message}
                 </p>
               )}
               <button
                 type='submit'
                 className='flex justify-end items-center text-white w-[80px] h-[80px] mt-[40px] bg-primary-2 text-[20px] font-medium p-0 rounded-[20px] relative hover:w-full transition-all ease-in-out duration-300 shadow-primary-1 shadow-2xl'>
-                <span className='text-center w-full'>Login</span>
+                <span className='w-full text-center'>Login</span>
                 <i className='flex justify-center items-center fa-solid fa-arrow-right text-4xl text-white bg-primary-1 z-10 -ml-[80px] rounded-[20px] w-[80px] h-[80px] shadow-sm' />
               </button>
             </form>
