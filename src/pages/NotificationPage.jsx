@@ -8,7 +8,7 @@ import Background from '../components/Background';
 import BackgroundAccessible from '../components/BackgroundAccessible';
 
 const token = localStorage.getItem('token');
-const socket = io('http://localhost:8080', {
+const socket = io('https://circlearn-back-end.up.railway.app', {
   extraHeaders: {
     auth: token
   }
