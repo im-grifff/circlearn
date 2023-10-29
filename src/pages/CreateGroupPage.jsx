@@ -108,11 +108,14 @@ export default function CreateGroup() {
 
   useEffect(() => {
     // fetch topic from API
-    fetch('https://circlearn-back-end.up.railway.app/topics')
-      .then((res) => res.json())
-      .then((data) => {
-        setTopics(data.data);
-        // console.log(data.data);
+    api
+      .get('/topics')
+      .then((res) => {
+        setTopics(res.data.data);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
       });
   }, []);
 

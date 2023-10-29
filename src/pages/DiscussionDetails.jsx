@@ -97,18 +97,18 @@ export default function DiscussionDetails() {
       />
       <Navbar />
       {renderAccesibility()}
-      <div className='container mx-auto px-2 mt-4'>
+      <div className='container px-2 mx-auto mt-4'>
         <Link to='/ruang' className='py-3'>
           {'< Back'}
         </Link>
         {loading ? (
-          <div className='flex justify-center items-center pt-20'>
-            <i className='fa-solid fa-circle-notch animate-spin text-3xl text-primary-1' />
+          <div className='flex items-center justify-center pt-20'>
+            <i className='text-3xl fa-solid fa-circle-notch animate-spin text-primary-1' />
           </div>
         ) : (
-          <div className='mt-3 bg-white shadow-lg border-2 rounded-lg p-3'>
-            <div className='flex flex-col lg:flex-row justify-between items-center lg:items-start gap-3 w-full '>
-              <div className='w-24 flex justify-center items-center'>
+          <div className='p-3 mt-3 bg-white border-2 rounded-lg shadow-lg'>
+            <div className='flex flex-col items-center justify-between w-full gap-3 lg:flex-row lg:items-start '>
+              <div className='flex items-center justify-center w-24'>
                 <img
                   src={
                     data.data.logo_grup !== undefined
@@ -118,11 +118,11 @@ export default function DiscussionDetails() {
                   alt=''
                 />
               </div>
-              <div className='flex-grow flex flex-col justify-center items-center lg:items-start lg:block'>
-                <h3 className='font-semibold mb-2'>{data.data.subject}</h3>
+              <div className='flex flex-col items-center justify-center flex-grow lg:items-start lg:block'>
+                <h3 className='mb-2 font-semibold'>{data.data.subject}</h3>
                 <div className='flex items-center mb-1'>
-                  <i className='fa-solid fa-user mr-3 w-5 h-5 flex justify-center items-center text-xl' />
-                  <span className='text-primary-1 font-medium'>
+                  <i className='flex items-center justify-center w-5 h-5 mr-3 text-xl fa-solid fa-user' />
+                  <span className='font-medium text-primary-1'>
                     {`${
                       data.data.peserta !== undefined
                         ? data.data.peserta.length
@@ -131,7 +131,7 @@ export default function DiscussionDetails() {
                   </span>
                 </div>
                 <div className='flex items-center mb-1'>
-                  <i className='fa-solid fa-users mr-3 w-5 h-5 flex justify-center items-center text-xl' />
+                  <i className='flex items-center justify-center w-5 h-5 mr-3 text-xl fa-solid fa-users' />
                   <span className='font-medium'>
                     Made by
                     <span className='text-primary-1'>
@@ -142,9 +142,9 @@ export default function DiscussionDetails() {
                 </div>
               </div>
               {data.member || data.author ? (
-                <div className='flex justify-center lg:block w-full lg:w-auto'>
+                <div className='flex justify-center w-full lg:block lg:w-auto'>
                   <span>
-                    <i className='fa-solid fa-calendar mr-2' />
+                    <i className='mr-2 fa-solid fa-calendar' />
                     {data.data.createdAt.slice(0, 10)}
                   </span>
                 </div>
@@ -171,19 +171,19 @@ export default function DiscussionDetails() {
                 type='button'
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `localhost:3000/ruang/${params.id}`
+                    `${process.env.REACT_APP_MAIN_URL}/ruang/${params.id}`
                   );
 
                   // eslint-disable-next-line no-alert
                   alert('Link Copied');
                 }}
-                className='bg-primary-1 mr-2 ml-2 mb-2 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1'>
+                className='flex-grow px-6 py-3 mb-2 ml-2 mr-2 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'>
                 Share
               </button>
               <button
                 type='button'
                 onClick={() => navigate(`/ruang/admininfo/${params.id}`)}
-                className='bg-primary-1 mr-2 ml-2 mb-2 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1'>
+                className='flex-grow px-6 py-3 mb-2 ml-2 mr-2 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'>
                 Contact Admin
               </button>
               {(() => {
@@ -199,7 +199,7 @@ export default function DiscussionDetails() {
                             'noopener,noreferrer'
                           );
                         }}
-                        className='bg-primary-1 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1 mr-3'>
+                        className='flex-grow px-6 py-3 mr-3 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'>
                         Open Meeting
                       </button>
                     );
@@ -209,7 +209,7 @@ export default function DiscussionDetails() {
                       <button
                         disabled
                         type='button'
-                        className='border-2 border-primary-1 text-primary-1 font-semibold px-6 py-3 flex-grow rounded-lg mr-3'>
+                        className='flex-grow px-6 py-3 mr-3 font-semibold border-2 rounded-lg border-primary-1 text-primary-1'>
                         No Meeting
                       </button>
                     );
@@ -223,14 +223,14 @@ export default function DiscussionDetails() {
               {data.member || data.author ? (
                 <Link
                   to={`/ruang/question/${params.id}`}
-                  className='bg-primary-1 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1 mr-3'>
+                  className='flex-grow px-6 py-3 mr-3 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'>
                   Questions
                 </Link>
               ) : (
                 <button
                   disabled
                   type='button'
-                  className='bg-white text-black font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1 mr-3'>
+                  className='flex-grow px-6 py-3 mr-3 font-semibold text-black bg-white rounded-lg shadow-lg shadow-primary-1'>
                   Not a Member
                 </button>
               )}
@@ -242,7 +242,7 @@ export default function DiscussionDetails() {
                       onClick={() => {
                         navigate(`/ruang/administrator/${params.id}`);
                       }}
-                      className='bg-primary-1 text-green-400 font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1'>
+                      className='flex-grow px-6 py-3 font-semibold text-green-400 rounded-lg shadow-lg bg-primary-1 shadow-primary-1'>
                       Admin
                     </button>
                   );
@@ -251,7 +251,7 @@ export default function DiscussionDetails() {
                   return (
                     <button
                       type='button'
-                      className='bg-primary-1 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1'
+                      className='flex-grow px-6 py-3 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'
                       onClick={userJoin}>
                       Join
                     </button>
@@ -261,7 +261,7 @@ export default function DiscussionDetails() {
                   return (
                     <button
                       type='button'
-                      className='bg-primary-1 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1'
+                      className='flex-grow px-6 py-3 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'
                       onClick={userLeave}>
                       Exit
                     </button>

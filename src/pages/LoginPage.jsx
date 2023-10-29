@@ -48,7 +48,8 @@ export default function LoginPage() {
           localStorage.setItem('token', response.data.data);
           if (username === 'admin' && password === 'adminadmin') {
             window.location.href =
-              'http://localhost:3001/admin/default?token=' + response.data.data;
+              `${process.env.REACT_APP_DASHBOARD_URL}/admin/default?token=` +
+              response.data.data;
             return;
           }
           navigate('/ruang');

@@ -30,7 +30,7 @@ export default function ManageGroupPage() {
         setDiscussionAdmin(response.data.data);
         setLoading(false);
         // eslint-disable-next-line no-console
-        console.log(response.data);
+        console.log(response.data.data);
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
@@ -56,23 +56,23 @@ export default function ManageGroupPage() {
       />
       <Navbar />
       {renderAccesibility()}
-      <div className='container mx-auto px-2 mt-4 mb-10'>
+      <div className='container px-2 mx-auto mt-4 mb-10'>
         <Link to='/profile' className='py-3'>
           {'< Kembali'}
         </Link>
-        <span className='text-primary-1 font-medium'> | Ruang diskusiku</span>
+        <span className='font-medium text-primary-1'> | Ruang diskusiku</span>
         <button
           onClick={() => {
             navigate('/create');
           }}
           type='button'
           className='flex justify-end items-center text-white w-[120px] h-[55px] ml-2 mt-2 bg-primary-2 text-[15px] font-medium p-0 rounded-[17px] relative hover:shadow-primary-1 shadow-2xl'>
-          <span className='text-center w-full'>Buat Ruang Diskusi Baru</span>
+          <span className='w-full text-center'>Buat Ruang Diskusi Baru</span>
         </button>
         <div>
           {loading ? (
-            <div className='flex justify-center items-center ml-auto pt-20'>
-              <i className='fa-solid fa-circle-notch animate-spin text-3xl text-primary-1' />
+            <div className='flex items-center justify-center pt-20 ml-auto'>
+              <i className='text-3xl fa-solid fa-circle-notch animate-spin text-primary-1' />
             </div>
           ) : (
             discussionAdmin.map((discussionRoom) => (

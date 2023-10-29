@@ -8,7 +8,7 @@ import Background from '../components/Background';
 import BackgroundAccessible from '../components/BackgroundAccessible';
 
 const token = localStorage.getItem('token');
-const socket = io('https://circlearn-back-end.up.railway.app', {
+const socket = io(process.env.REACT_APP_API_URL, {
   extraHeaders: {
     auth: token
   }
@@ -66,10 +66,10 @@ export default function NotificationPage() {
       />
       <Navbar />
       {renderAccesibility()}
-      <div className='container mx-auto px-2 mt-20'>
+      <div className='container px-2 mx-auto mt-20'>
         <div className='mb-5 lg:w-1/1'>
           <Link
-            className='px-3 py-2 text-md font-medium leading-snug text-primary-1 lg:text-black hover:opacity-75'
+            className='px-3 py-2 font-medium leading-snug text-md text-primary-1 lg:text-black hover:opacity-75'
             to='/'>
             {'< Kembali ke Beranda'}
           </Link>
@@ -77,8 +77,8 @@ export default function NotificationPage() {
             {(() => {
               if (!isConnected) {
                 return (
-                  <div className='flex justify-center items-center pt-2'>
-                    <i className='fa-solid fa-circle-notch animate-spin text-3xl text-primary-1' />
+                  <div className='flex items-center justify-center pt-2'>
+                    <i className='text-3xl fa-solid fa-circle-notch animate-spin text-primary-1' />
                   </div>
                 );
               }

@@ -98,21 +98,21 @@ export default function QuestionDetailPage() {
   const renderReply = () => {
     if (data.post[0].replies.length === 0) {
       return (
-        <span className='text-primary-1 font-medium text-sm'>
+        <span className='text-sm font-medium text-primary-1'>
           Belum ada Pembahasan
         </span>
       );
     }
     if (data.post[0].replies.length === 1) {
       return (
-        <span className='text-primary-1 font-medium text-sm'>
+        <span className='text-sm font-medium text-primary-1'>
           {` ${data.post[0].replies.length}`}
           Pembahasan
         </span>
       );
     }
     return (
-      <span className='text-primary-1 font-medium text-sm'>
+      <span className='text-sm font-medium text-primary-1'>
         {` ${data.post[0].replies.length}`}
         Pembahasan
       </span>
@@ -122,13 +122,13 @@ export default function QuestionDetailPage() {
   const renderTags = () => {
     if (data.post[0].tags.length === 0) {
       return (
-        <span className='py-1 px-2 text-sm bg-primary-1 rounded-md text-white'>
+        <span className='px-2 py-1 text-sm text-white rounded-md bg-primary-1'>
           Belum ada Tag
         </span>
       );
     }
     const tags = data.post[0].tags.map((tag) => (
-      <span className='py-1 px-2 text-sm bg-primary-1 rounded-md text-white'>
+      <span className='px-2 py-1 text-sm text-white rounded-md bg-primary-1'>
         {tag}
       </span>
     ));
@@ -175,30 +175,30 @@ export default function QuestionDetailPage() {
       <Navbar />
       {renderAccesibility()}
       {loading ? (
-        <div className='flex justify-center items-center ml-auto pt-20'>
-          <i className='fa-solid fa-circle-notch animate-spin text-3xl text-primary-1' />
+        <div className='flex items-center justify-center pt-20 ml-auto'>
+          <i className='text-3xl fa-solid fa-circle-notch animate-spin text-primary-1' />
         </div>
       ) : (
-        <div className='container mx-auto px-2 mt-4 mb-10'>
+        <div className='container px-2 mx-auto mt-4 mb-10'>
           <button type='button' onClick={() => navigate(-1)} className='py-3'>
             {'< Kembali'}
           </button>
-          <div className='mt-3 flex flex-col lg:flex-row justify-between items-center lg:items-start gap-3 w-full '>
-            <div className='w-24 flex justify-center items-center'>
+          <div className='flex flex-col items-center justify-between w-full gap-3 mt-3 lg:flex-row lg:items-start '>
+            <div className='flex items-center justify-center w-24'>
               <img src={avatar} alt='' />
             </div>
-            <div className='flex-grow flex flex-col justify-center items-center lg:items-start lg:block'>
-              <h3 className='font-semibold mb-2 text-xl'>
+            <div className='flex flex-col items-center justify-center flex-grow lg:items-start lg:block'>
+              <h3 className='mb-2 text-xl font-semibold'>
                 {data.post[0].username_author}
               </h3>
               <div className='flex items-center mb-1'>
-                <i className='fa-solid fa-clock mr-3 w-5 h-5 flex justify-center items-center text-xl text-primary-1' />
-                <span className=' font-medium text-gray-500'>
+                <i className='flex items-center justify-center w-5 h-5 mr-3 text-xl fa-solid fa-clock text-primary-1' />
+                <span className='font-medium text-gray-500 '>
                   {renderTime()}
                 </span>
               </div>
               <div className='flex items-center mb-1'>
-                <i className='fa-solid fa-message mr-3 w-5 h-5 flex justify-center items-center text-xl text-primary-1' />
+                <i className='flex items-center justify-center w-5 h-5 mr-3 text-xl fa-solid fa-message text-primary-1' />
                 {renderReply()}
               </div>
             </div>
@@ -207,27 +207,27 @@ export default function QuestionDetailPage() {
                 type='button'
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `localhost:3000/question/detail/${param.id}`
+                    `${process.env.REACT_APP_MAIN_URL}/question/detail/${param.id}`
                   );
 
                   // eslint-disable-next-line no-alert
                   alert('Link Copied');
                 }}
-                className='bg-primary-1 mr-2 ml-2 mb-2 text-white font-semibold px-6 py-3 flex-grow rounded-lg shadow-lg shadow-primary-1'>
+                className='flex-grow px-6 py-3 mb-2 ml-2 mr-2 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'>
                 Share
               </button>
             </div>
           </div>
-          <div className='flex flex-col gap-3 border-b border-primary-1 pb-3 justify-between items-center lg:items-start mt-3 '>
-            <div className=' mt-3 lg:mt-0 text-center lg:text-start'>
-              <h3 className='font-semibold text-xl mb-3'>
+          <div className='flex flex-col items-center justify-between gap-3 pb-3 mt-3 border-b border-primary-1 lg:items-start '>
+            <div className='mt-3 text-center  lg:mt-0 lg:text-start'>
+              <h3 className='mb-3 text-xl font-semibold'>
                 {data.post[0].title}
               </h3>
               <p>{data.post[0].description}</p>
             </div>
             <div className='flex flex-col gap-3'>
               <div className='flex gap-3'>
-                <i className='fa-solid fa-tag flex justify-center items-center text-xl text-primary-1' />
+                <i className='flex items-center justify-center text-xl fa-solid fa-tag text-primary-1' />
                 {renderTags()}
               </div>
             </div>
@@ -237,13 +237,13 @@ export default function QuestionDetailPage() {
               <img src={avatar} alt='' className='w-10 h-10' />
               <span className='font-semibold'>{dataUser.data.username}</span>
             </div>
-            <div className='border-b border-primary-1 pb-3'>
+            <div className='pb-3 border-b border-primary-1'>
               <textarea
                 name=''
                 id=''
                 cols='20'
                 rows='10'
-                className='border-primary-1 border rounded-lg w-full p-3 mt-3 h-40 resize-none'
+                className='w-full h-40 p-3 mt-3 border rounded-lg resize-none border-primary-1'
                 placeholder='Tulis komentar kamu disini'
                 onChange={handleComment}
               />
@@ -252,14 +252,14 @@ export default function QuestionDetailPage() {
                 isSubmitting ? (
                   <button
                     type='button'
-                    className='bg-primary-1 text-white py-2 w-40 rounded-lg mt-3 shadow-lg shadow-primary-1'
+                    className='w-40 py-2 mt-3 text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'
                     disabled>
-                    <i className='fa-solid fa-circle-notch animate-spin text-white' />
+                    <i className='text-white fa-solid fa-circle-notch animate-spin' />
                   </button>
                 ) : (
                   <button
                     type='button'
-                    className='bg-primary-1 text-white py-2 w-40 rounded-lg mt-3 shadow-lg shadow-primary-1'
+                    className='w-40 py-2 mt-3 text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'
                     onClick={handleCommentSubmit}>
                     Kirim
                   </button>
@@ -267,9 +267,9 @@ export default function QuestionDetailPage() {
               }
             </div>
           </div>
-          <div className='mt-3 flex flex-col justify-center items-center'>
+          <div className='flex flex-col items-center justify-center mt-3'>
             {data.comments.length === 0 ? (
-              <span className='text-primary-1 font-medium text-lg'>
+              <span className='text-lg font-medium text-primary-1'>
                 Belum ada Pembahasan
               </span>
             ) : (

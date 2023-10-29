@@ -12,7 +12,7 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AccessibilityPopup from '../components/AccessibilityPopup';
 import Navbar from '../layouts/Navbar';
@@ -29,6 +29,7 @@ export default function RuangPage() {
   const [accessibility, setAccessibility] = useState(false);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [topics, setTopics] = useState([]);
 
   const renderAccesibility = () => {
     if (accessibility) {
@@ -94,6 +95,26 @@ export default function RuangPage() {
 
   console.log(discussionRooms);
 
+  useEffect(() => {
+    // get topics
+    const token = localStorage.getItem('token');
+    api
+      .get('/topics', {
+        headers: {
+          'auth-token': token // the token is a variable which holds the token
+        }
+      })
+      .then((response) => {
+        // eslint-disable-next-line no-console
+        console.log(response.data.data);
+        setTopics(response.data.data);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <AccessibilityPopup
@@ -102,31 +123,37 @@ export default function RuangPage() {
       />
       <Navbar />
       {renderAccesibility()}
-      <div className='container mx-auto px-2 mt-4'>
-        <div className='flex flex-col lg:flex-row mb-4'>
+      <div className='container px-2 mx-auto mt-4'>
+        <div className='flex flex-col mb-4 lg:flex-row'>
           <form
             onSubmit={handleSubmit}
-            className='flex-grow flex flex-col sm:flex-row'>
+            className='flex flex-col flex-grow sm:flex-row'>
             <input
               type='text'
               placeholder='Search Rooms'
-              className='border-2 border-primary-1 rounded-lg flex-grow py-1 px-2 ml-1 sm:ml-auto'
+              className='flex-grow px-2 py-1 ml-1 border-2 rounded-lg border-primary-1 sm:ml-auto'
               value={searchTerm}
               onChange={handleChange}
             />
             <button
               type='submit'
-              className='py-2 px-6 sm:px-10 bg-primary-1 rounded-md mt-2 sm:mt-auto ml-2 text-white hover:shadow-primary-1 shadow-lg'>
+              className='px-6 py-2 mt-2 ml-2 text-white rounded-md shadow-lg sm:px-10 bg-primary-1 sm:mt-auto hover:shadow-primary-1'>
               Search
             </button>
           </form>
         </div>
       </div>
-      <div className='container mx-auto px-2 mt-4'>
+      <div className='container px-2 mx-auto mt-4'>
         <div className='flex justify-between mb-3'>
-          <h2 className='font-semibold mt-auto mb-auto'>
+          <h2 className='mt-auto mb-auto font-semibold'>
             List
-            <span className='text-primary-1'> My Rooms</span>
+            <Link to='/manage' className='mx-1 text-primary-1'>
+              My Rooms
+            </Link>
+            |
+            <Link to='/joined' className='ml-1 text-primary-1'>
+              Joined
+            </Link>
           </h2>
           <div className='flex flex-row-reverse'>
             <button
@@ -149,7 +176,7 @@ export default function RuangPage() {
               nested>
               {(close) => (
                 <div className='bg-white rounded-lg shadow-lg p-4 max-w-[300px] w-full'>
-                  <div className='flex justify-between items-center mb-4'>
+                  <div className='flex items-center justify-between mb-4'>
                     <h2 className='font-semibold'>Filter by Tags</h2>
                     <button
                       type='button'
@@ -171,19 +198,13 @@ export default function RuangPage() {
                         setFilter(e.target.value);
                       }}
                       value={filter}
-                      className='border-2 border-primary-1 rounded-lg py-1 px-2'>
+                      className='px-2 py-1 border-2 rounded-lg border-primary-1'>
                       <option value='all'>All</option>
-                      <option value='test'>Test</option>
-                      <option value='sains'>Science</option>
-                      <option value='teknologi'>Technology</option>
-                      <option value='programming'>Programming</option>
-                      <option value='agrikultur'>Agriculture</option>
-                      <option value='bisnis'>Business</option>
-                      <option value='kesehatan'>Health</option>
-                      <option value='debat'>Debate</option>
-                      <option value='hiburan'>Entertainment</option>
-                      <option value='kuliner'>Food</option>
-                      <option value='Olahraga'>Sports</option>
+                      {topics.map((topic) => (
+                        <option key={topic._id} value={topic.topicName}>
+                          {topic.topicName}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className='flex justify-end mt-4'>
@@ -201,10 +222,10 @@ export default function RuangPage() {
             </Popup>
           </div>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
+        <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
           {loading ? (
-            <div className='flex justify-center items-center ml-auto pt-20'>
-              <i className='fa-solid fa-circle-notch animate-spin text-3xl text-primary-1' />
+            <div className='flex items-center justify-center pt-20 ml-auto'>
+              <i className='text-3xl fa-solid fa-circle-notch animate-spin text-primary-1' />
             </div>
           ) : (
             searchResults.map((discussionRoom) => (
