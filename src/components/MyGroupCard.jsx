@@ -186,12 +186,12 @@ export default function MyGroupCard({ discussionRoom }) {
           <p>{deskripsi}</p>
         </div>
         <div className='flex flex-col mt-5 lg:block text-start'>
-          <button
+          {/* <button
             type='button'
             onClick={() => navigate(`/ruang/administrator/${_id}`)}
             className='flex-grow px-6 py-3 mb-3 font-semibold text-white rounded-lg shadow-lg bg-primary-1 lg:mr-3'>
             Admin Settings
-          </button>
+          </button> */}
           <button
             type='button'
             onClick={() => deleteRunding(_id)}
