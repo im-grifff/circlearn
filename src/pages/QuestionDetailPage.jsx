@@ -1,20 +1,20 @@
 /* eslint-disable comma-dangle */
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import AccessibilityPopup from '../components/AccessibilityPopup';
-import Navbar from '../layouts/Navbar';
-import Background from '../components/Background';
-import BackgroundAccessible from '../components/BackgroundAccessible';
-import avatar from '../assets/img/avatar.png';
-import QuestionResponseCard from '../components/QuestionResponseCard';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import AccessibilityPopup from "../components/AccessibilityPopup";
+import Navbar from "../layouts/Navbar";
+import Background from "../components/Background";
+import BackgroundAccessible from "../components/BackgroundAccessible";
+import avatar from "../assets/img/avatar.png";
+import QuestionResponseCard from "../components/QuestionResponseCard";
 
-import api from '../config/api';
+import api from "../config/api";
 
 export default function QuestionDetailPage() {
   const [accessibility, setAccessibility] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [commentForm, setCommentForm] = useState('');
+  const [commentForm, setCommentForm] = useState("");
   const [dataUser, setDataUser] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -22,9 +22,9 @@ export default function QuestionDetailPage() {
   const param = useParams();
 
   useEffect(() => {
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
   }, []);
 
   const renderAccesibility = () => {
@@ -35,12 +35,12 @@ export default function QuestionDetailPage() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
-      .get('/user/data', {
+      .get("/user/data", {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         setDataUser(response.data);
@@ -52,12 +52,12 @@ export default function QuestionDetailPage() {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
       .get(`/posts/comments/${param.id}`, {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         setData(response.data.data);
@@ -138,17 +138,17 @@ export default function QuestionDetailPage() {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     api
       .post(
         `/posts/comments/create/${param.id}`,
         {
-          content_form: commentForm
+          content_form: commentForm,
         },
         {
           headers: {
-            'auth-token': token // the token is a variable which holds the token
-          }
+            "auth-token": token, // the token is a variable which holds the token
+          },
         }
       )
       .then((response) => {
@@ -181,7 +181,7 @@ export default function QuestionDetailPage() {
       ) : (
         <div className='container px-2 mx-auto mt-4 mb-10'>
           <button type='button' onClick={() => navigate(-1)} className='py-3'>
-            {'< Kembali'}
+            {"< Kembali"}
           </button>
           <div className='flex flex-col items-center justify-between w-full gap-3 mt-3 lg:flex-row lg:items-start '>
             <div className='flex items-center justify-center w-24'>
@@ -211,7 +211,7 @@ export default function QuestionDetailPage() {
                   );
 
                   // eslint-disable-next-line no-alert
-                  alert('Link Copied');
+                  alert("Link Copied");
                 }}
                 className='flex-grow px-6 py-3 mb-2 ml-2 mr-2 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'>
                 Share
@@ -261,7 +261,7 @@ export default function QuestionDetailPage() {
                     type='button'
                     className='w-40 py-2 mt-3 text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'
                     onClick={handleCommentSubmit}>
-                    Kirim
+                    Send
                   </button>
                 )
               }
@@ -270,7 +270,7 @@ export default function QuestionDetailPage() {
           <div className='flex flex-col items-center justify-center mt-3'>
             {data.comments.length === 0 ? (
               <span className='text-lg font-medium text-primary-1'>
-                Belum ada Pembahasan
+                No Discussion
               </span>
             ) : (
               <div className='flex flex-col w-full'>

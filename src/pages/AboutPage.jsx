@@ -4,7 +4,7 @@ import AccessibilityPopup from "../components/AccessibilityPopup";
 import Navbar from "../layouts/Navbar";
 import Background from "../components/Background";
 import profile from "../assets/img/profileGriff.JPG";
-import profile2 from "../assets/img/profileGriff.JPG";
+import profile2 from "../assets/img/profileSIR.JPG";
 import BackgroundAccessible from "../components/BackgroundAccessible";
 
 export default function AboutPage() {
