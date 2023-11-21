@@ -1,20 +1,20 @@
 /* eslint-disable comma-dangle */
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import AccessibilityPopup from "../components/AccessibilityPopup";
-import Navbar from "../layouts/Navbar";
-import Background from "../components/Background";
-import BackgroundAccessible from "../components/BackgroundAccessible";
-import avatar from "../assets/img/avatar.png";
-import QuestionResponseCard from "../components/QuestionResponseCard";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import AccessibilityPopup from '../components/AccessibilityPopup';
+import Navbar from '../layouts/Navbar';
+import Background from '../components/Background';
+import BackgroundAccessible from '../components/BackgroundAccessible';
+import avatar from '../assets/img/avatar.png';
+import QuestionResponseCard from '../components/QuestionResponseCard';
 
-import api from "../config/api";
+import api from '../config/api';
 
 export default function QuestionDetailPage() {
   const [accessibility, setAccessibility] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [commentForm, setCommentForm] = useState("");
+  const [commentForm, setCommentForm] = useState('');
   const [dataUser, setDataUser] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -22,9 +22,9 @@ export default function QuestionDetailPage() {
   const param = useParams();
 
   useEffect(() => {
-    document.body.style.setProperty("--color-primary", "#00adb5");
-    document.body.style.setProperty("--color-secondary", "#636499");
-    document.body.style.setProperty("--color-tertiary", "#121225");
+    document.body.style.setProperty('--color-primary', '#00adb5');
+    document.body.style.setProperty('--color-secondary', '#636499');
+    document.body.style.setProperty('--color-tertiary', '#121225');
   }, []);
 
   const renderAccesibility = () => {
@@ -35,12 +35,12 @@ export default function QuestionDetailPage() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     api
-      .get("/user/data", {
+      .get('/user/data', {
         headers: {
-          "auth-token": token, // the token is a variable which holds the token
-        },
+          'auth-token': token // the token is a variable which holds the token
+        }
       })
       .then((response) => {
         setDataUser(response.data);
@@ -52,12 +52,12 @@ export default function QuestionDetailPage() {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     api
       .get(`/posts/comments/${param.id}`, {
         headers: {
-          "auth-token": token, // the token is a variable which holds the token
-        },
+          'auth-token': token // the token is a variable which holds the token
+        }
       })
       .then((response) => {
         setData(response.data.data);
@@ -138,17 +138,17 @@ export default function QuestionDetailPage() {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     api
       .post(
         `/posts/comments/create/${param.id}`,
         {
-          content_form: commentForm,
+          content_form: commentForm
         },
         {
           headers: {
-            "auth-token": token, // the token is a variable which holds the token
-          },
+            'auth-token': token // the token is a variable which holds the token
+          }
         }
       )
       .then((response) => {
@@ -166,6 +166,42 @@ export default function QuestionDetailPage() {
     setCommentForm(e.target.value);
   };
 
+  const handleMarkAsSolved = () => {
+    api
+      .put(`/posts/solved/${param.id}`, {
+        solved: true
+      })
+      .then((response) => {
+        // eslint-disable-next-line no-console
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
+  };
+
+  const handleUnmarkAsSolved = () => {
+    api
+      .put(`/posts/solved/${param.id}`, {
+        solved: false
+      })
+      .then((response) => {
+        // eslint-disable-next-line no-console
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
+  };
+
+  // console.log(dataUser);
+  console.log('post', data.post);
+  console.log('user', dataUser.data);
+
   return (
     <>
       <AccessibilityPopup
@@ -181,7 +217,7 @@ export default function QuestionDetailPage() {
       ) : (
         <div className='container px-2 mx-auto mt-4 mb-10'>
           <button type='button' onClick={() => navigate(-1)} className='py-3'>
-            {"< Kembali"}
+            {'< Kembali'}
           </button>
           <div className='flex flex-col items-center justify-between w-full gap-3 mt-3 lg:flex-row lg:items-start '>
             <div className='flex items-center justify-center w-24'>
@@ -203,6 +239,27 @@ export default function QuestionDetailPage() {
               </div>
             </div>
             <div>
+              {/* if owner add "mark as solved" button */}
+              {data.post[0].solved === false ? (
+                dataUser.data._id === data.post[0].author[0] && (
+                  <button
+                    type='button'
+                    className='flex-grow px-6 py-3 mb-2 ml-2 mr-2 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'
+                    onClick={handleMarkAsSolved}>
+                    Mark as Solved
+                  </button>
+                )
+              ) : (
+                <button
+                  type='button'
+                  className='flex-grow px-6 py-3 mb-2 ml-2 mr-2 font-semibold text-white bg-gray-400 rounded-lg '
+                  onClick={handleUnmarkAsSolved}
+                  disabled={dataUser.data._id !== data.post[0].author[0]}>
+                  {dataUser.data._id === data.post[0].author[0]
+                    ? 'Mark as Unsolved'
+                    : 'Solved'}
+                </button>
+              )}
               <button
                 type='button'
                 onClick={() => {
@@ -211,7 +268,7 @@ export default function QuestionDetailPage() {
                   );
 
                   // eslint-disable-next-line no-alert
-                  alert("Link Copied");
+                  alert('Link Copied');
                 }}
                 className='flex-grow px-6 py-3 mb-2 ml-2 mr-2 font-semibold text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'>
                 Share
@@ -219,7 +276,7 @@ export default function QuestionDetailPage() {
             </div>
           </div>
           <div className='flex flex-col items-center justify-between gap-3 pb-3 mt-3 border-b border-primary-1 lg:items-start '>
-            <div className='mt-3 text-center  lg:mt-0 lg:text-start'>
+            <div className='mt-3 text-center lg:mt-0 lg:text-start'>
               <h3 className='mb-3 text-xl font-semibold'>
                 {data.post[0].title}
               </h3>

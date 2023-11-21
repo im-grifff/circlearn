@@ -86,9 +86,15 @@ export default function RuangPage() {
     if (filter === 'all') {
       setSearchResults(discussionRooms);
     } else {
-      const newResults = discussionRooms.filter((discussion) =>
-        discussion.jenisRunding.toLowerCase().includes(filter.toLowerCase())
-      );
+      console.log(discussionRooms);
+      const newResults = discussionRooms.filter((discussion) => {
+        const tags = discussion.jenisRunding[0].split(',');
+        if (tags.includes(filter)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
       setSearchResults(newResults);
     }
   }, [discussionRooms, filter]);

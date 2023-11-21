@@ -20,6 +20,7 @@ export default function CreateGroup() {
   const [deskripsiform, setDeskripsi] = useState('');
   const [jenisform, setJenis] = useState([]);
   const [topics, setTopics] = useState([]);
+  const [requesttopic, setRequestTopic] = useState('');
 
   const ref = useRef();
   const navigate = useNavigate();
@@ -119,6 +120,26 @@ export default function CreateGroup() {
       });
   }, []);
 
+  const handleRequestTopic = (e) => {
+    setRequestTopic(e.target.value);
+  };
+
+  const handleSubmitRequestTopic = (e) => {
+    api
+      .post('/topics/request', {
+        topicName: requesttopic
+      })
+      .then((response) => {
+        // eslint-disable-next-line no-console
+        console.log(response.data);
+        alert('Request topic berhasil dikirim');
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <AccessibilityPopup
@@ -211,6 +232,27 @@ export default function CreateGroup() {
                   <label htmlFor={topic.topicName}>{topic.topicName}</label>
                 </div>
               ))}
+            </div>
+          </div>
+          <div className='flex flex-col gap-3 mt-3'>
+            <label htmlFor='requesttopic' className='text-lg font-semibold'>
+              Request subject to admin
+            </label>
+            <div className='flex gap-4'>
+              <input
+                type='text'
+                name='requesttopic'
+                id='requesttopic'
+                placeholder='Science'
+                className='px-3 py-2 bg-transparent border rounded-md w-80 border-primary-1 filter backdrop-blur-md'
+                onChange={handleRequestTopic}
+              />
+              <button
+                type='button'
+                onClick={handleSubmitRequestTopic}
+                className='px-10 py-2 text-white rounded-lg shadow-lg bg-primary-1 shadow-primary-1'>
+                Request
+              </button>
             </div>
           </div>
 

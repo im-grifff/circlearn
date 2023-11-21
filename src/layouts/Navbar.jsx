@@ -77,11 +77,11 @@ export default function Navbar() {
                 <img src={avatar} alt='' className='w-10 h-10' />
                 <span className='lg:hidden'>Your Profile</span>
               </Link>
-              <Link
+              {/* <Link
                 className='font-medium leading-snug text-md text-primary-3 hover:opacity-75'
                 to='/notifications'>
                 <i className='text-3xl fa-regular fa-bell lg:text-xl' />
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
