@@ -183,39 +183,6 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className='container mx-auto flex flex-col-reverse my-10 lg:flex-row px-5 md:px-0'>
-        <div className='lg:w-[666px] px-4 lg:px-10'>
-          <div>
-            <h1 className='font-semibold text-2xl lg:text-4xl mb-3 lg:mb-5'>
-              Light, Fast & Powerful
-            </h1>
-            <p className='text-[#6F7CB2] text-sm lg:text-base'>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-              commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
-              sem. Nulla consequat massa quis enim.
-            </p>
-          </div>
-
-          <div>
-            {data1.map((item, index) => (
-              <div key={index} className='my-6 lg:my-10 w-full lg:w-64'>
-                <img src={item.icon} alt={item.title} />
-                <h1 className='font-semibold my-3 lg:my-5 text-xl'>
-                  {item.title}
-                </h1>
-                <p className='text-xs lg:text-sm'>{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className='lg:w-[900px] mx-auto mt-10 lg:mt-0 py-10 md:py-0'>
-          <img src={featureImg1} alt='' />
-        </div>
-      </div>
-
       <div className='container mx-auto flex flex-col-reverse items-center justify-center my-10 lg:flex-row px-5 md:px-0'>
         <div className='w-full lg:w-[850px] px-4 lg:px-10 py-10 md:py-0'>
           <img src={featureImg2} alt='' />
