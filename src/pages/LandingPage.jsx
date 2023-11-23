@@ -182,7 +182,6 @@ export default function LandingPage() {
           ))}
         </div>
       </div>
-
       <div className='container mx-auto flex flex-col-reverse items-center justify-center my-10 lg:flex-row px-5 md:px-0'>
         <div className='w-full lg:w-[850px] px-4 lg:px-10 py-10 md:py-0'>
           <img src={featureImg2} alt='' />
