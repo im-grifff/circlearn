@@ -191,7 +191,6 @@ export default function CreateGroup() {
               id='name'
               onChange={(e) => setSubject(e.target.value)}
               className='px-3 py-2 bg-transparent border rounded-md border-primary-1 filter backdrop-blur-md'
-              required
             />
           </div>
           <div className='flex flex-col gap-3 mt-3'>
@@ -208,7 +207,6 @@ export default function CreateGroup() {
               cols='20'
               rows='10'
               className='w-full h-40 p-3 bg-transparent border rounded-lg resize-none border-primary-1 filter backdrop-blur-md'
-              required
             />
           </div>
           <div className='flex flex-col gap-3 mt-3'>
@@ -230,7 +228,6 @@ export default function CreateGroup() {
                     value={topic.topicName}
                     onChange={handleCheckboxChange}
                     className='w-4 h-4'
-                    required
                   />
                   <label htmlFor={topic.topicName}>{topic.topicName}</label>
                 </div>
