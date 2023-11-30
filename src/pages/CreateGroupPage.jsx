@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
-import api from '../config/api';
+import api from "../config/api";
 
-import AccessibilityPopup from '../components/AccessibilityPopup';
-import Navbar from '../layouts/Navbar';
-import Background from '../components/Background';
-import BackgroundAccessible from '../components/BackgroundAccessible';
+import AccessibilityPopup from "../components/AccessibilityPopup";
+import Navbar from "../layouts/Navbar";
+import Background from "../components/Background";
+import BackgroundAccessible from "../components/BackgroundAccessible";
 
-import avatarBig from '../assets/img/avatarBig.png';
+import avatarBig from "../assets/img/avatarBig.png";
 
 /* dalam create ruang diskusi baru, jika user tidak mengupload image, maka akan mengambil
    random image dari unsplash stock image website sebagai image group */
@@ -16,19 +16,19 @@ export default function CreateGroup() {
   const [accessibility, setAccessibility] = useState(false);
   const [file, setFile] = useState(null);
   const [filesrc, setFileSrc] = useState(null);
-  const [subjectform, setSubject] = useState('');
-  const [deskripsiform, setDeskripsi] = useState('');
+  const [subjectform, setSubject] = useState("");
+  const [deskripsiform, setDeskripsi] = useState("");
   const [jenisform, setJenis] = useState([]);
   const [topics, setTopics] = useState([]);
-  const [requesttopic, setRequestTopic] = useState('');
+  const [requesttopic, setRequestTopic] = useState("");
 
   const ref = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.setProperty('--color-primary', '#00adb5');
-    document.body.style.setProperty('--color-secondary', '#636499');
-    document.body.style.setProperty('--color-tertiary', '#121225');
+    document.body.style.setProperty("--color-primary", "#00adb5");
+    document.body.style.setProperty("--color-secondary", "#636499");
+    document.body.style.setProperty("--color-tertiary", "#121225");
     setFileSrc(avatarBig);
   }, []);
 
@@ -47,50 +47,50 @@ export default function CreateGroup() {
   };
 
   const reset = () => {
-    ref.current.value = '';
+    ref.current.value = "";
   };
 
   const CreateHandler = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const formData = new FormData();
 
-    if (subjectform === '' || deskripsiform === '' || jenisform.length === 0) {
+    if (subjectform === "" || deskripsiform === "" || jenisform.length === 0) {
       // eslint-disable-next-line no-console
-      console.log('Maaf, data kurang lengkap untuk membuat ruang diskusi baru');
+      console.log("Maaf, data kurang lengkap untuk membuat ruang diskusi baru");
       return;
     }
 
     if (file == null) {
-      await fetch('https://source.unsplash.com/random/500x300?landscape')
+      await fetch("https://source.unsplash.com/random/500x300?landscape")
         .then((res) => res.blob())
         .then((blob) => {
           const nowDate = Date.now().toString();
           const filerandom = new File([blob], `random-${nowDate}.png`, {
-            type: 'image/png'
+            type: "image/png",
           });
-          formData.append('logo_form', filerandom);
+          formData.append("logo_form", filerandom);
         });
     } else {
-      formData.append('logo_form', file);
+      formData.append("logo_form", file);
     }
 
-    formData.append('subject_form', subjectform);
+    formData.append("subject_form", subjectform);
 
-    formData.append('deskripsi_form', deskripsiform);
+    formData.append("deskripsi_form", deskripsiform);
 
-    formData.append('jenis_form', jenisform);
+    formData.append("jenis_form", jenisform);
 
     await api
-      .post('/runding/create', formData, {
+      .post("/runding/create", formData, {
         headers: {
-          'auth-token': token // the token is a variable which holds the token
-        }
+          "auth-token": token, // the token is a variable which holds the token
+        },
       })
       .then((response) => {
         // eslint-disable-next-line no-console
         console.log(response.data);
-        navigate('/ruang');
+        navigate("/ruang");
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
@@ -110,7 +110,7 @@ export default function CreateGroup() {
   useEffect(() => {
     // fetch topic from API
     api
-      .get('/topics')
+      .get("/topics")
       .then((res) => {
         setTopics(res.data.data);
       })
@@ -126,13 +126,13 @@ export default function CreateGroup() {
 
   const handleSubmitRequestTopic = (e) => {
     api
-      .post('/topics/request', {
-        topicName: requesttopic
+      .post("/topics/request", {
+        topicName: requesttopic,
       })
       .then((response) => {
         // eslint-disable-next-line no-console
         console.log(response.data);
-        alert('Request topic berhasil dikirim');
+        alert("Request topic berhasil dikirim");
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
@@ -150,7 +150,7 @@ export default function CreateGroup() {
       {renderAccesibility()}
       <div className='container px-2 mx-auto mt-4 mb-10'>
         <Link to='/ruang' className='py-3'>
-          {'< Back'}
+          {"< Back"}
         </Link>
         <form action='#' onSubmit={CreateHandler}>
           <div className='flex flex-col items-center justify-center w-full gap-3 mt-3'>
@@ -191,6 +191,7 @@ export default function CreateGroup() {
               id='name'
               onChange={(e) => setSubject(e.target.value)}
               className='px-3 py-2 bg-transparent border rounded-md border-primary-1 filter backdrop-blur-md'
+              required
             />
           </div>
           <div className='flex flex-col gap-3 mt-3'>
@@ -207,6 +208,7 @@ export default function CreateGroup() {
               cols='20'
               rows='10'
               className='w-full h-40 p-3 bg-transparent border rounded-lg resize-none border-primary-1 filter backdrop-blur-md'
+              required
             />
           </div>
           <div className='flex flex-col gap-3 mt-3'>
@@ -228,6 +230,7 @@ export default function CreateGroup() {
                     value={topic.topicName}
                     onChange={handleCheckboxChange}
                     className='w-4 h-4'
+                    required
                   />
                   <label htmlFor={topic.topicName}>{topic.topicName}</label>
                 </div>
