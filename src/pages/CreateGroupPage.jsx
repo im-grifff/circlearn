@@ -230,7 +230,6 @@ export default function CreateGroup() {
                     value={topic.topicName}
                     onChange={handleCheckboxChange}
                     className='w-4 h-4'
-                    required
                   />
                   <label htmlFor={topic.topicName}>{topic.topicName}</label>
                 </div>
