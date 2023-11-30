@@ -1,0 +1,178 @@
+[33mcommit 78b31c9e3e07a5ac43cdca638e340efe389a3cd9[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Fri Dec 1 01:54:15 2023 +0800
+
+    fix err
+
+[33mcommit c17f1e253075947979339518570c22de60f7941d[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Fri Dec 1 01:51:23 2023 +0800
+
+    add required form
+
+[33mcommit 1405580e54b1ab47557629741e7df16314d7222c[m
+Author: Sitouxz <yehezkielowen0901@gmail.com>
+Date:   Thu Nov 30 20:54:19 2023 +0800
+
+    updates:
+    - Question and Answer Sort latest
+    - Handle Duplicate Account
+    - User Edit and Delete Answer and Question
+    - Rich Text Answer
+    - Required field on create room
+
+[33mcommit d2f664e32458635e441e8b51187cf253a3f8a02a[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Thu Nov 23 20:37:50 2023 +0800
+
+    fix route ad my rooms
+
+[33mcommit 0a2e73d3059a5c1450ccbd089bc97d7159103e90[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Thu Nov 23 20:27:15 2023 +0800
+
+    Fix landing page
+
+[33mcommit 8e572502c78167e55bb7fe65bda9b6d9f6ae6de9[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Thu Nov 23 20:26:28 2023 +0800
+
+    Fix Landing Page
+
+[33mcommit 9b0395222ef1adf3d39470d210eb574bcef77528[m
+Author: Sitouxz <yehezkielowen0901@gmail.com>
+Date:   Wed Nov 22 03:17:08 2023 +0800
+
+    updates:
+    - added input request topic in create room
+    - added mark as solved in questions
+
+[33mcommit 948cf76a78a46d9f82fa4b7e41fcdfe48d40301f[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Mon Oct 30 23:21:11 2023 +0800
+
+    fix error
+
+[33mcommit 079fe5c33d2acf822592050732b6e462503ff121[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Mon Oct 30 22:55:05 2023 +0800
+
+    Update About and Question Detail
+
+[33mcommit d3f3065171a2b8340d3ac97f517a67636f7d6c90[m
+Author: Sitouxz <yehezkielowen0901@gmail.com>
+Date:   Mon Oct 30 09:45:38 2023 +0800
+
+    added netlify config
+
+[33mcommit 0b833e27b9f9d41a51769cacad44ea5e00a32fa4[m
+Author: Sitouxz <yehezkielowen0901@gmail.com>
+Date:   Mon Oct 30 04:21:48 2023 +0800
+
+    removed admin settings
+
+[33mcommit 006c4045a3341a681cedc2495710db3c5be540c0[m
+Author: Sitouxz <yehezkielowen0901@gmail.com>
+Date:   Mon Oct 30 04:13:26 2023 +0800
+
+    big updates
+
+[33mcommit 16a81b1d6902ca26f69e3267ea4ec6e6836f05de[m
+Author: Sitouxz <yehezkielowen0901@gmail.com>
+Date:   Sun Oct 29 02:19:23 2023 +0800
+
+    changed endpoint to production
+
+[33mcommit 7dd4dc319ab1254a9aaa684100b166ea00258443[m
+Author: Sitouxz <yehezkielowen0901@gmail.com>
+Date:   Sat Oct 28 02:24:08 2023 +0800
+
+    added redirect if admin
+
+[33mcommit 27667ca1dbd8343c27d0b539dad810460ce1f82b[m
+Author: Sitouxz <yehezkielowen0901@gmail.com>
+Date:   Wed Oct 25 00:42:12 2023 +0800
+
+    added topic from API
+
+[33mcommit 39ff09b7f85e7e0ac756fc2b4361f18a372940b5[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Wed Oct 18 21:16:40 2023 +0800
+
+    translate
+
+[33mcommit b6ada5874b137b86fd7a15bd092514ad01a27bff[m
+Author: Sitouxz <yehezkielowen0901@gmail.com>
+Date:   Wed Oct 18 00:45:22 2023 +0800
+
+    updates:
+    - added sort by topic
+    - added share button
+    - added topic checkbox in create room
+    - some adjustments
+
+[33mcommit cde72b28190a752c28ddee72d9d7b4b297267057[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Tue Oct 17 18:58:01 2023 +0800
+
+    Translate QuestionPage (modal)
+
+[33mcommit 0c25672b019e7e7b45533c21161459ea1c389c95[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Tue Oct 17 18:53:13 2023 +0800
+
+    Translate QuestionCard
+
+[33mcommit 3e7c4fe6036e2aa715f3f30fc6d25da1ba3881fb[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Tue Oct 17 18:49:15 2023 +0800
+
+    Translate CreateGroupPage
+
+[33mcommit 9b028ea134e266dd3a9b6e104237e179da11530a[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Tue Oct 17 18:44:11 2023 +0800
+
+    Translate RuangPage
+
+[33mcommit c994e0caea558c232a17f9e961a3cf3dc24a72f5[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Tue Oct 17 18:24:42 2023 +0800
+
+    Translate disscussinRoom, myGroup, DisDatails, Profile, Ruangpage
+
+[33mcommit 9a8bbbcca4c09d0e4e9f0f57c7ae7e70c7e102df[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Tue Oct 17 17:57:05 2023 +0800
+
+    Translate
+    DiscussionRoom
+    mygroup
+    DisDetail
+    ProfilePage
+    Question
+    Ruang
+
+[33mcommit 27ae27e3646ec8bb306c181048b8f6d026ed531f[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Tue Oct 10 23:55:12 2023 +0800
+
+    Transate to Eng (about, login,regis,home page)
+
+[33mcommit 6c6ef74bd18422c99cd1c4be4315404a29c35fa3[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Wed Oct 4 21:08:49 2023 +0800
+
+    Make About page & edit manifest file
+
+[33mcommit 4c7a4fdacf763934dc63570d34f5defd16c72d68[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Wed Oct 4 20:38:32 2023 +0800
+
+    Change Icon
+
+[33mcommit 24ef1eba0a25ad321e164d03f8585a31b3667f9e[m
+Author: im-Starry <s2200054@student.unklab.ac.id>
+Date:   Wed Oct 4 20:20:05 2023 +0800
+
+    first push
