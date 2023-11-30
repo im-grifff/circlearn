@@ -169,7 +169,7 @@ export default function LoginPage() {
                 <a
                   href='/register'
                   className='text-primary-2 font-medium ml-[5px]'>
-                  Sign In Now !
+                  Sign Up Now !
                 </a>
               </p>
               <p className='text-center'>

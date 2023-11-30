@@ -7,6 +7,8 @@ import Background from '../components/Background';
 import BackgroundAccessible from '../components/BackgroundAccessible';
 import avatar from '../assets/img/avatar.png';
 import QuestionResponseCard from '../components/QuestionResponseCard';
+import Popup from 'reactjs-popup';
+import RichTextEditor from '../components/RichTextEditor';
 
 import api from '../config/api';
 
@@ -17,6 +19,11 @@ export default function QuestionDetailPage() {
   const [commentForm, setCommentForm] = useState('');
   const [dataUser, setDataUser] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [createQuestionForm, setCreateQuestionForm] = useState({
+    title: '',
+    description: '',
+    keyword: []
+  });
 
   const navigate = useNavigate();
   const param = useParams();
@@ -202,6 +209,77 @@ export default function QuestionDetailPage() {
   console.log('post', data.post);
   console.log('user', dataUser.data);
 
+  console.log('comments', data.comments);
+
+  // sort comments by updatedAt
+  data.comments?.sort((a, b) => {
+    const dateA = new Date(a.updatedAt);
+    const dateB = new Date(b.updatedAt);
+    return dateB - dateA;
+  });
+
+  const handleDeleteQuestion = () => {
+    const token = localStorage.getItem('token');
+    api
+      .delete(`/posts/${param.id}`, {
+        headers: {
+          'auth-token': token // the token is a variable which holds the token
+        }
+      })
+      .then((response) => {
+        // eslint-disable-next-line no-console
+        console.log(response);
+        navigate(-1);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
+  };
+
+  const handleCreateQuestionForm = (e) => {
+    if (e.target.name === 'keyword') {
+      const keyword = e.target.value.split(',');
+      setCreateQuestionForm({
+        ...createQuestionForm,
+        [e.target.name]: keyword
+      });
+      return;
+    }
+    setCreateQuestionForm({
+      ...createQuestionForm,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleCreateQuestion = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    api
+      .put(
+        `/posts/${param.id}`,
+        {
+          title_form: createQuestionForm.title,
+          description_form: createQuestionForm.description,
+          tags_form: createQuestionForm.keyword
+        },
+        {
+          headers: {
+            'auth-token': token // the token is a variable which holds the token
+          }
+        }
+      )
+      .then((response) => {
+        // eslint-disable-next-line no-console
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <AccessibilityPopup
@@ -239,6 +317,118 @@ export default function QuestionDetailPage() {
               </div>
             </div>
             <div>
+              {dataUser.data._id === data.post[0].author[0] && (
+                <Popup
+                  trigger={
+                    <button
+                      type='button'
+                      className='flex-grow px-6 py-3 mb-2 ml-2 mr-2 font-semibold text-white bg-gray-500 rounded-lg shadow-lg shadow-gray-500'>
+                      Edit Question
+                    </button>
+                  }
+                  modal
+                  nested>
+                  {(close) => (
+                    <form className='max-h-screen p-4 pb-24 m-4 overflow-scroll bg-white rounded-lg shadow-lg lg:overflow-auto'>
+                      <h2 className='mb-4 text-xl font-semibold'>
+                        Ask a question
+                      </h2>
+                      <div>
+                        <p>Cara mengajukan pertanyaan:</p>
+                        <ol className='list-decimal list-inside'>
+                          <li>
+                            Pastikan pertanyaan Anda belum pernah di bahas pada
+                            forum ini, Anda bisa melakukan searching terlebih
+                            dahulu dengan memasukkan kata kunci.
+                          </li>
+                          <li>
+                            Mulailah dengan menuliskan judul pertanyaan Anda
+                            secara singkat dan jelas
+                          </li>
+                          <li>
+                            Sampaikan kendala permasalahan Anda dengan tidak
+                            berbelit-belit
+                          </li>
+                          <li>
+                            Tambahkan tag yang membantu memunculkan pertanyaan
+                            Anda kepada anggota komunitas yang lain.
+                          </li>
+                        </ol>
+                      </div>
+                      <div className='mt-3'>
+                        <label
+                          htmlFor='title'
+                          className='text-lg font-semibold text-primary-1'>
+                          Title
+                        </label>
+                        <input
+                          type='text'
+                          id='title'
+                          name='title'
+                          className='flex-grow w-full px-2 py-1 border rounded-lg border-primary-1'
+                          onChange={(e) => handleCreateQuestionForm(e)}
+                          defaultValue={data.post[0].title}
+                        />
+                      </div>
+                      <div className='mt-3'>
+                        <label
+                          htmlFor='description'
+                          className='text-lg font-semibold text-primary-1'>
+                          Write your question
+                        </label>
+
+                        <textarea
+                          id='description'
+                          name='description'
+                          className='flex-grow w-full h-40 px-2 py-1 border rounded-lg border-primary-1'
+                          onChange={(e) => handleCreateQuestionForm(e)}
+                          defaultValue={data.post[0].description}
+                        />
+                      </div>
+                      <div className='mt-3'>
+                        <label
+                          htmlFor='tags'
+                          className='text-lg font-semibold text-primary-1'>
+                          Add Keywords
+                        </label>
+                        <span> *minimal 3 keywords. use ‘,’ to seprate</span>
+                        <input
+                          type='text'
+                          id='tags'
+                          name='keyword'
+                          className='flex-grow w-full px-2 py-1 border rounded-lg border-primary-1'
+                          onChange={(e) => handleCreateQuestionForm(e)}
+                          defaultValue={data.post[0].tags.join(',')}
+                        />
+                      </div>
+                      <div className='mt-3 text-end'>
+                        <button
+                          type='button'
+                          className='px-6 py-2 mt-2 mr-3 font-semibold border-2 rounded-md sm:px-10 border-primary-1 lg:mt-0 lg:ml-2 text-primary-1'
+                          onClick={() => {
+                            close();
+                          }}>
+                          Cancel
+                        </button>
+                        <button
+                          type='button'
+                          className='px-6 py-2 mt-2 text-white rounded-md shadow-lg sm:px-10 bg-primary-1 shadow-primary-1 lg:mt-0 lg:ml-2'
+                          onClick={handleCreateQuestion}>
+                          Create
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                </Popup>
+              )}
+              {dataUser.data._id === data.post[0].author[0] && (
+                <button
+                  type='button'
+                  className='flex-grow px-6 py-3 mb-2 ml-2 mr-2 font-semibold text-white bg-red-500 rounded-lg shadow-lg shadow-red-500'
+                  onClick={handleDeleteQuestion}>
+                  Delete Question
+                </button>
+              )}
               {/* if owner add "mark as solved" button */}
               {data.post[0].solved === false ? (
                 dataUser.data._id === data.post[0].author[0] && (
@@ -260,6 +450,7 @@ export default function QuestionDetailPage() {
                     : 'Solved'}
                 </button>
               )}
+
               <button
                 type='button'
                 onClick={() => {
@@ -295,7 +486,13 @@ export default function QuestionDetailPage() {
               <span className='font-semibold'>{dataUser.data.username}</span>
             </div>
             <div className='pb-3 border-b border-primary-1'>
-              <textarea
+              <div className='mt-3'>
+                <RichTextEditor
+                  content={commentForm}
+                  setContent={setCommentForm}
+                />
+              </div>
+              {/* <textarea
                 name=''
                 id=''
                 cols='20'
@@ -303,7 +500,7 @@ export default function QuestionDetailPage() {
                 className='w-full h-40 p-3 mt-3 border rounded-lg resize-none border-primary-1'
                 placeholder='Tulis komentar kamu disini'
                 onChange={handleComment}
-              />
+              /> */}
               {
                 // eslint-disable-next-line react/jsx-wrap-multilines
                 isSubmitting ? (
@@ -332,7 +529,11 @@ export default function QuestionDetailPage() {
             ) : (
               <div className='flex flex-col w-full'>
                 {data.comments.map((comment) => (
-                  <QuestionResponseCard key={comment.id} data={comment} />
+                  <QuestionResponseCard
+                    key={comment._id}
+                    data={comment}
+                    userData={dataUser.data}
+                  />
                 ))}
               </div>
             )}

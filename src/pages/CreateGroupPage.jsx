@@ -55,7 +55,7 @@ export default function CreateGroup() {
     const token = localStorage.getItem('token');
     const formData = new FormData();
 
-    if (subjectform === '' || deskripsiform === '' || jenisform === '') {
+    if (subjectform === '' || deskripsiform === '' || jenisform.length === 0) {
       // eslint-disable-next-line no-console
       console.log('Maaf, data kurang lengkap untuk membuat ruang diskusi baru');
       return;

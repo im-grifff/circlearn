@@ -4,35 +4,35 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-wrap-multilines */
-import React, { useState, useEffect } from "react";
-import Popup from "reactjs-popup";
-import { useParams, Link } from "react-router-dom";
-import AccessibilityPopup from "../components/AccessibilityPopup";
-import Navbar from "../layouts/Navbar";
-import Background from "../components/Background";
-import QuestionCard from "../components/QuestionCard";
-import BackgroundAccessible from "../components/BackgroundAccessible";
+import React, { useState, useEffect } from 'react';
+import Popup from 'reactjs-popup';
+import { useParams, Link } from 'react-router-dom';
+import AccessibilityPopup from '../components/AccessibilityPopup';
+import Navbar from '../layouts/Navbar';
+import Background from '../components/Background';
+import QuestionCard from '../components/QuestionCard';
+import BackgroundAccessible from '../components/BackgroundAccessible';
 
-import api from "../config/api";
+import api from '../config/api';
 
 export default function QuestionPage() {
   const [accessibility, setAccessibility] = useState(false);
   const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [createQuestionForm, setCreateQuestionForm] = useState({
-    title: "",
-    description: "",
-    keyword: [],
+    title: '',
+    description: '',
+    keyword: []
   });
 
   const param = useParams();
 
   useEffect(() => {
-    document.body.style.setProperty("--color-primary", "#00adb5");
-    document.body.style.setProperty("--color-secondary", "#636499");
-    document.body.style.setProperty("--color-tertiary", "#121225");
+    document.body.style.setProperty('--color-primary', '#00adb5');
+    document.body.style.setProperty('--color-secondary', '#636499');
+    document.body.style.setProperty('--color-tertiary', '#121225');
   }, []);
 
   const renderAccesibility = () => {
@@ -43,12 +43,12 @@ export default function QuestionPage() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     api
       .get(`/runding/posts/${param.id}`, {
         headers: {
-          "auth-token": token, // the token is a variable which holds the token
-        },
+          'auth-token': token // the token is a variable which holds the token
+        }
       })
       .then((response) => {
         setData(response.data.data);
@@ -65,19 +65,19 @@ export default function QuestionPage() {
 
   const handleCreateQuestion = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     api
       .post(
         `/runding/posts/create/${param.id}`,
         {
           title_form: createQuestionForm.title,
           description_form: createQuestionForm.description,
-          tags_form: createQuestionForm.keyword,
+          tags_form: createQuestionForm.keyword
         },
         {
           headers: {
-            "auth-token": token, // the token is a variable which holds the token
-          },
+            'auth-token': token // the token is a variable which holds the token
+          }
         }
       )
       .then((response) => {
@@ -92,17 +92,17 @@ export default function QuestionPage() {
   };
 
   const handleCreateQuestionForm = (e) => {
-    if (e.target.name === "keyword") {
-      const keyword = e.target.value.split(",");
+    if (e.target.name === 'keyword') {
+      const keyword = e.target.value.split(',');
       setCreateQuestionForm({
         ...createQuestionForm,
-        [e.target.name]: keyword,
+        [e.target.name]: keyword
       });
       return;
     }
     setCreateQuestionForm({
       ...createQuestionForm,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -111,7 +111,7 @@ export default function QuestionPage() {
   };
 
   const handleSubmit = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       e.preventDefault();
       setSearchData(data);
       // eslint-disable-next-line array-callback-return, max-len
@@ -120,9 +120,16 @@ export default function QuestionPage() {
       );
       setSearchData(newResults);
 
-      setSearchTerm("");
+      setSearchTerm('');
     }
   };
+
+  // sort latest first
+  searchData.sort((a, b) => {
+    const dateA = new Date(a.updatedAt);
+    const dateB = new Date(b.updatedAt);
+    return dateB - dateA;
+  });
 
   return (
     <>
@@ -132,35 +139,35 @@ export default function QuestionPage() {
       />
       <Navbar />
       {renderAccesibility()}
-      <div className='container mx-auto px-2 m-4'>
+      <div className='container px-2 m-4 mx-auto'>
         <Link to={`/ruang/${param.id}`} className='py-3'>
-          {"< Back"}
+          {'< Back'}
         </Link>
         <div className='flex flex-col lg:flex-row'>
           <input
             type='text'
             placeholder='Cari pertanyaan'
-            className='border-2 border-primary-1 rounded-lg flex-grow py-1 px-2'
+            className='flex-grow px-2 py-1 border-2 rounded-lg border-primary-1'
             value={searchTerm}
             onChange={handleChange}
             onKeyDown={handleSubmit}
           />
         </div>
         <div>
-          <h2 className='font-semibold mb-3 mt-2'>All Question</h2>
+          <h2 className='mt-2 mb-3 font-semibold'>All Question</h2>
           <Popup
             trigger={
               <button
                 type='button'
-                className='py-1 px-6 sm:px-10 bg-primary-1 rounded-md mt-1 lg:mt-0 lg:ml-1 text-white'>
+                className='px-6 py-1 mt-1 text-white rounded-md sm:px-10 bg-primary-1 lg:mt-0 lg:ml-1'>
                 NEW
               </button>
             }
             modal
             nested>
             {(close) => (
-              <form className='bg-white rounded-lg shadow-lg p-4 m-4 max-h-screen pb-24 overflow-scroll lg:overflow-auto'>
-                <h2 className='font-semibold text-xl mb-4'>Ask a question</h2>
+              <form className='max-h-screen p-4 pb-24 m-4 overflow-scroll bg-white rounded-lg shadow-lg lg:overflow-auto'>
+                <h2 className='mb-4 text-xl font-semibold'>Ask a question</h2>
                 <div>
                   <p>Cara mengajukan pertanyaan:</p>
                   <ol className='list-decimal list-inside'>
@@ -186,35 +193,35 @@ export default function QuestionPage() {
                 <div className='mt-3'>
                   <label
                     htmlFor='title'
-                    className='font-semibold text-primary-1 text-lg'>
+                    className='text-lg font-semibold text-primary-1'>
                     Title
                   </label>
                   <input
                     type='text'
                     id='title'
                     name='title'
-                    className='border border-primary-1 rounded-lg flex-grow py-1 px-2 w-full'
+                    className='flex-grow w-full px-2 py-1 border rounded-lg border-primary-1'
                     onChange={(e) => handleCreateQuestionForm(e)}
                   />
                 </div>
                 <div className='mt-3'>
                   <label
                     htmlFor='description'
-                    className='font-semibold text-primary-1 text-lg'>
+                    className='text-lg font-semibold text-primary-1'>
                     Write your question
                   </label>
 
                   <textarea
                     id='description'
                     name='description'
-                    className='border border-primary-1 rounded-lg flex-grow py-1 px-2 w-full h-40'
+                    className='flex-grow w-full h-40 px-2 py-1 border rounded-lg border-primary-1'
                     onChange={(e) => handleCreateQuestionForm(e)}
                   />
                 </div>
                 <div className='mt-3'>
                   <label
                     htmlFor='tags'
-                    className='font-semibold text-primary-1 text-lg'>
+                    className='text-lg font-semibold text-primary-1'>
                     Add Keywords
                   </label>
                   <span> *minimal 3 keywords. use ‘,’ to seprate</span>
@@ -222,14 +229,14 @@ export default function QuestionPage() {
                     type='text'
                     id='tags'
                     name='keyword'
-                    className='border border-primary-1 rounded-lg flex-grow py-1 px-2 w-full'
+                    className='flex-grow w-full px-2 py-1 border rounded-lg border-primary-1'
                     onChange={(e) => handleCreateQuestionForm(e)}
                   />
                 </div>
                 <div className='mt-3 text-end'>
                   <button
                     type='button'
-                    className='mr-3 py-2 px-6 sm:px-10 border-2 border-primary-1 rounded-md mt-2 lg:mt-0 lg:ml-2 text-primary-1 font-semibold'
+                    className='px-6 py-2 mt-2 mr-3 font-semibold border-2 rounded-md sm:px-10 border-primary-1 lg:mt-0 lg:ml-2 text-primary-1'
                     onClick={() => {
                       close();
                     }}>
@@ -237,7 +244,7 @@ export default function QuestionPage() {
                   </button>
                   <button
                     type='button'
-                    className='py-2 px-6 sm:px-10 bg-primary-1 shadow-lg shadow-primary-1 rounded-md mt-2 lg:mt-0 lg:ml-2 text-white'
+                    className='px-6 py-2 mt-2 text-white rounded-md shadow-lg sm:px-10 bg-primary-1 shadow-primary-1 lg:mt-0 lg:ml-2'
                     onClick={handleCreateQuestion}>
                     Create
                   </button>
@@ -246,8 +253,8 @@ export default function QuestionPage() {
             )}
           </Popup>
           {loading ?? (
-            <div className='flex justify-center items-center ml-auto pt-20'>
-              <i className='fa-solid fa-circle-notch animate-spin text-3xl text-primary-1' />
+            <div className='flex items-center justify-center pt-20 ml-auto'>
+              <i className='text-3xl fa-solid fa-circle-notch animate-spin text-primary-1' />
             </div>
           )}
           {data.length > 0 ? (
@@ -262,7 +269,7 @@ export default function QuestionPage() {
             </div>
           ) : (
             data.length === 0 ?? (
-              <div className='flex justify-center items-center pt-20'>
+              <div className='flex items-center justify-center pt-20'>
                 <p className='text-center text-primary-1'>No question yet</p>
               </div>
             )
